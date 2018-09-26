@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webpatser\Uuid\Uuid;
 
@@ -38,15 +36,5 @@ class User extends Authenticatable
         static::creating(function ($model) {
             $model->{$model->getKeyName()} = Uuid::generate()->string;
         });
-    }
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'uuid';
     }
 }
