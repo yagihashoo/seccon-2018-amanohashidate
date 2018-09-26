@@ -9,8 +9,6 @@ use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
     public $incrementing = false;
 
     /**
