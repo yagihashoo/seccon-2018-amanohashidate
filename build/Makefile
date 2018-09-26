@@ -1,0 +1,53 @@
+include .env
+COMPOSE = dockerfiles/docker-compose.yml
+CONTAINER = php-fpm
+PREFIX = amanohashidate
+
+setup:
+	@ echo "🤖  < Resolving code dependencies..."
+	@ cd $(CURDIR)/app && \
+		composer install --no-dev && \
+		yarn
+	@ echo
+	@ echo "🤖  < Setting up encryption key..."
+	@ cd $(CURDIR)/app && \
+		php artisan key:generate
+
+setup-dev:
+	@ echo "🤖  < Resolving code dependencies..."
+	@ cd $(CURDIR)/app && \
+		composer install && \
+		yarn
+	@ echo
+	@ echo "🤖  < Setting up encryption key..."
+	@ cd $(CURDIR)/app && \
+		php artisan key:generate
+
+up:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build
+
+restart:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) restart
+
+clean:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) stop && \
+		yes | docker-compose -f $(COMPOSE) -p $(PREFIX) rm
+
+ps:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) ps
+
+sh:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec $(CONTAINER) \
+		sh
+
+mysql:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec mysql \
+		mysql -u $(DB_USERNAME) -p$(DB_PASSWORD) -h localhost app
+
+migrate:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
+		php artisan migrate
+
+init:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
+		php artisan migrate:refresh --seed

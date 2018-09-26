@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "$APP_PORT:80"
+    depends_on:
+      - php-fpm
+    volumes:
+      - ../logs/nginx:/var/log/nginx
+      - ../app:/var/www/app
+    environment:
+      TZ: "Asia/Tokyo"
+    restart: always
+
+  php-fpm:
+    build: ./php-fpm
+    working_dir: /var/www/app
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      TZ: "Asia/Tokyo"
+    volumes:
+       - ../app:/var/www/app
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_USER: $DB_USERNAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      TZ: "Asia/Tokyo"
+    restart: always
+
+  redis:
+    image: redis:4.0.8
+    restart: always
+
+#  worker:
+#    build: ./worker
+#    depends_on:
+#      - redis
+#      - npm
+#    volumes:
+#      - .:/home/worker/worker
+#    restart: always
+
