@@ -31,8 +31,6 @@ class CreateChallengesTable extends Migration
      */
     public function down()
     {
-        Schema::table('challenges', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('challenges');
     }
 }
