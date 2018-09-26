@@ -8,11 +8,15 @@ jobs:
     docker:
       # specify the version you desire here
       - image: yagihashoo/php-node
+        environment:
+            DB_HOST: 127.0.0.1
+            DB_USERNAME: 'root'
+            DB_PASSWORD: ''
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mysql:9.4
+      - image: circleci/mysql:5.7
 
     working_directory: ~/repo
 
@@ -35,6 +39,11 @@ jobs:
           name: Setting up enviroment
           command: cp _env .env && php artisan key:generate
           working_directory: build/app
+
+      - run:
+        name: DB migration and seeding
+        command: php artisan migrate && php artisan migrate:refresh --seed
+        working_directory: build/app
 
       - run:
           name: Install dependent packages for Node
