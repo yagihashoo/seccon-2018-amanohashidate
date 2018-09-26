@@ -9,9 +9,9 @@ jobs:
       # specify the version you desire here
       - image: yagihashoo/php-node
         environment:
-            DB_HOST: 127.0.0.1
-            DB_USERNAME: 'root'
-            DB_PASSWORD: ''
+            - DB_HOST: 127.0.0.1
+            - DB_USERNAME: 'root'
+            - DB_PASSWORD: ''
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
