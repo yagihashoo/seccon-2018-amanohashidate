@@ -44,7 +44,7 @@ class User extends Authenticatable
         });
     }
 
-    public function changeRole($role_id): void
+    public function changeRole(int $role_id): void
     {
         if (!isset($role_id) or !in_array($role_id, [self::ROLE_USER, self::ROLE_SETTER, self::ROLE_ADMIN])) {
             throw new InvalidRoleIdException();
