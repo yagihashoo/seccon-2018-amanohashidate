@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\User;
 
 class CreateUsersTable extends Migration
 {
@@ -17,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->unique();
             $table->string('name', 16)->unique();
             $table->string('password');
-            $table->integer('role_id')->default(0);
+            $table->integer('role_id')->default(User::ROLE_USER);
             $table->timestamps();
         });
     }
