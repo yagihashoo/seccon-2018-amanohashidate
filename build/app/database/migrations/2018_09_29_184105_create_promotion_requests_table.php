@@ -16,7 +16,7 @@ class CreatePromotionRequestsTable extends Migration
     {
         Schema::create('promotion_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('user_id');
+            $table->uuid('user_id')->unique();
             $table->integer('role_id')->default(User::ROLE_SETTER);
             $table->boolean('done')->default(false);
             $table->timestamps();
