@@ -51,3 +51,7 @@ migrate:
 init:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		php artisan migrate:refresh --seed
+
+test-server:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
+		vendor/bin/phpunit
