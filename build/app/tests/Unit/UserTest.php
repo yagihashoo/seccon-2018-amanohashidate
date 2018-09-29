@@ -19,7 +19,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected static function createUser(int $role_id = User::ROLE_USER)
+    protected static function createUser(int $role_id = User::ROLE_USER): User
     {
         return User::create([
             'name' => str_random(8),
