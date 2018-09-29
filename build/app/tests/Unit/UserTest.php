@@ -19,11 +19,12 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected static function createUser()
+    protected static function createUser($role_id = User::ROLE_USER)
     {
         return User::create([
             'name' => str_random(8),
             'password' => Hash::make(str_random(8)),
+            'role_id' => $role_id,
         ]);
     }
 
@@ -48,5 +49,11 @@ class UserTest extends TestCase
         } catch (Exception $e) {
             $this->assertInstanceOf(InvalidRoleIdException::class, $e);
         }
+    }
+
+    public function testIsAdmin()
+    {
+        $user = self::createUser(User::ROLE_ADMIN);
+        $this->assertTrue($user->isAdmin());
     }
 }
