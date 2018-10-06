@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('auth')->get('/', function () {
     return view('welcome');
+})->name('top');
+
+Route::get('/login', function() {
+   return view('login');
 });
+$this->post('login', 'Auth\LoginController@login')->name('login');
+$this->post('register', 'Auth\RegisterController@register')->name('register');
+$this->get('logout', 'Auth\LoginController@logout')->name('logout');
