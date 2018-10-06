@@ -8,7 +8,7 @@
 
 namespace Tests\Unit;
 
-use App\Exceptions\InsufficientRoleException;
+use App\Exceptions\ApprovedRequestException;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
@@ -47,22 +47,21 @@ class PromotionRequestTest extends TestCase
     public function testRequestApprovalSuccess()
     {
         $user = self::createUser();
-        $admin = self::createUser(User::ROLE_ADMIN);
         $req = self::createRequest($user->id);
-        $req->approve($admin);
+        $req->approve();
         $this->assertTrue($req->done);
     }
 
     public function testRequestApprovalFail()
     {
         $user = self::createUser();
-        $not_admin = self::createUser();
         $req = self::createRequest($user->id);
         try {
-            $req->approve($not_admin);
+            $req->approve();
+            $req->approve();
         } catch (Exception $e) {
-            $this->assertInstanceOf(InsufficientRoleException::class, $e);
-            $this->assertNull($req->done);
+            $this->assertInstanceOf(ApprovedRequestException::class, $e);
+            $this->assertTrue($req->done);
         }
     }
 

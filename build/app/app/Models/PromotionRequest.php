@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\ApprovedRequestException;
-use App\Exceptions\InsufficientRoleException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -34,25 +32,19 @@ class PromotionRequest extends Model
         //
     ];
 
-    public function approve(User $transaction_user = null)
+    public function approve()
     {
-        if (!$transaction_user) {
-            $transaction_user = Auth::user();
-        }
-
         if ($this->done) {
             throw new ApprovedRequestException();
         }
 
-        if (!$transaction_user->isAdmin()) {
-            throw new InsufficientRoleException();
-        }
         $user = User::where('id', $this->user_id)->first();
-        DB::transaction(function () use ($user, $transaction_user) {
+        DB::transaction(function () use ($user) {
             $user->changeRole(User::ROLE_SETTER);
 
             $this->done = true;
             $this->save();
+
             Log::info(sprintf('Request for promotion by %s(id: %s) is approved', $user->name, $user->id));
         });
     }
