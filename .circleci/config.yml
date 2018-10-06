@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Install PHP extensions
-          command: sudo docker-php-ext-install pdo_mysql
+          command: sudo docker-php-ext-install pdo_mysql pcntl
 
       - run:
           name: Install dependent packages for PHP
