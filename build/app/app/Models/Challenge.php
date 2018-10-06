@@ -17,6 +17,7 @@ class Challenge extends Model
     protected $fillable = [
         'title',
         'model_answer',
+        'verified',
         'solved',
         'setter_id',
         'file_id',
@@ -38,5 +39,10 @@ class Challenge extends Model
         static::creating(function ($model) {
             $model->{$model->getKeyName()} = Uuid::generate()->string;
         });
+    }
+
+    public function enqueue()
+    {
+        //
     }
 }

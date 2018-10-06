@@ -17,6 +17,7 @@ class CreateChallengesTable extends Migration
             $table->uuid('id')->unique();
             $table->string('title', 128)->unique();
             $table->string('model_answer', 512);
+            $table->boolean('verified')->default(false);
             $table->boolean('solved')->default(false);
             $table->uuid('setter_id');
             $table->uuid('file_id')->unique();
