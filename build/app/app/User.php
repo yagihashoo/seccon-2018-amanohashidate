@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\Exceptions\InvalidRoleIdException;
 use Illuminate\Foundation\Auth\User as Authenticatable;

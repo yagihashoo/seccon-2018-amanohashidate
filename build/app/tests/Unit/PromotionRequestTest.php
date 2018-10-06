@@ -11,8 +11,8 @@ namespace Tests\Unit;
 use App\Exceptions\ApprovedRequestException;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
-use App\Models\PromotionRequest;
+use App\User;
+use App\PromotionRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\Exceptions\ApprovedRequestException;
 use Illuminate\Database\Eloquent\Model;

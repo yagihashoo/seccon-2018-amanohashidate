@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\Challenge;
+use App\User;
+use App\Challenge;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ChallengePolicy

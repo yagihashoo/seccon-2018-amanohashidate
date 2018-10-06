@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Submit extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,8 +12,9 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-        'csp_report',
-        'src_ip',
+        'payload',
+        'user_id',
+        'challenge_id',
     ];
 
     /**

@@ -10,7 +10,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Exceptions\InvalidRoleIdException;
 use Exception;
