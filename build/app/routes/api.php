@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::resource('user', 'Api\UserController', ['only' => ['index', 'show']]);
 Route::get('me', 'Api\UserController@me');
