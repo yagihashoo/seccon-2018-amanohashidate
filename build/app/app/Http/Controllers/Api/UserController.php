@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function me()
     {
-        return response(Auth::user())
+        return response(Auth::user());
     }
 
     public function index(Request $request)
