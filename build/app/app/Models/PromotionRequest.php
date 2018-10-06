@@ -34,7 +34,7 @@ class PromotionRequest extends Model
         //
     ];
 
-    public function approve(User $transaction_user)
+    public function approve(User $transaction_user = null)
     {
         if (!$transaction_user) {
             $transaction_user = Auth::user();
