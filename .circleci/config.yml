@@ -12,7 +12,6 @@ jobs:
             - DB_HOST: 127.0.0.1
             - DB_USERNAME: 'root'
             - DB_PASSWORD: ''
-        run: docker-php-ext-install pdo_mysql
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,6 +33,10 @@ jobs:
           - v1-dependencies-{{ checksum "build/app/composer.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
 
       - run:
           name: Install dependent packages for PHP
