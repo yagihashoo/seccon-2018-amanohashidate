@@ -20,7 +20,7 @@ class UserController extends Controller
         return response(Auth::user());
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $this->authorize('index', User::class);
 
