@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->role_id === self::ROLE_ADMIN;
     }
+
+    public function isSetter(): bool
+    {
+        return $this->role_id === self::ROLE_SETTER;
+    }
 }

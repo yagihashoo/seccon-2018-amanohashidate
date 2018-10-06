@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\VerifiedChallengeException;
+use App\Exceptions\SolvedChallengeException;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
@@ -39,6 +41,26 @@ class Challenge extends Model
         static::creating(function ($model) {
             $model->{$model->getKeyName()} = Uuid::generate()->string;
         });
+    }
+
+    public function verify()
+    {
+        if ($this->verified) {
+            throw new VerifiedChallengeException();
+        }
+
+        $this->verified = true;
+        $this->save();
+    }
+
+    public function solve()
+    {
+        if ($this->solved) {
+            throw new SolvedChallengeException();
+        }
+
+        $this->solved = true;
+        $this->save();
     }
 
     public function enqueue()
