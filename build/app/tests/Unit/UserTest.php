@@ -31,7 +31,7 @@ class UserTest extends TestCase
     public function testUserGeneration()
     {
         $user = self::createUser();
-        $this->assertTrue(isset($user->id));
+        $this->assertNotNull($user);
     }
 
     public function testChangeUserRole()
