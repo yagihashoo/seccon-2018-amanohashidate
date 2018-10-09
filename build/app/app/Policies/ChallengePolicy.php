@@ -12,10 +12,10 @@ class ChallengePolicy
 
     public function create(User $user)
     {
-        return $user->role_id === User::ROLE_SETTER;
+        return $user->role_id >= User::ROLE_SETTER;
     }
 
-    public function save(User $user, Challenge $challenge)
+    public function update(User $user, Challenge $challenge)
     {
         return $user->id === $challenge->setter_id;
     }
