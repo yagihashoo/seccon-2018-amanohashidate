@@ -17,12 +17,14 @@ class Challenge extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'title',
         'model_answer',
         'verified',
         'solved',
         'setter_id',
         'file_id',
+        'from_ip',
     ];
 
     /**
@@ -64,6 +66,11 @@ class Challenge extends Model
     }
 
     public function enqueue()
+    {
+        //
+    }
+
+    public function storeChallengeHtml(string $html)
     {
         //
     }

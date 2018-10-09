@@ -15,10 +15,11 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->string('title', 128)->unique();
-            $table->string('model_answer', 512);
+            $table->string('title', 128)->default('');
+            $table->string('model_answer', 512)->default('');
             $table->boolean('verified')->default(false);
             $table->boolean('solved')->default(false);
+            $table->string('from_ip');
             $table->uuid('setter_id');
             $table->uuid('file_id')->unique();
             $table->timestamps();
