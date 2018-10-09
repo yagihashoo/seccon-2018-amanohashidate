@@ -20,8 +20,20 @@ class ChallengeController extends Controller
     {
         $limit = (min(Input::get('limit'), 100) ?? 100) + 1;
         $offset = Input::get('offset') ?? 0;
+        $filter = Input::get('filter');
 
-        $challenges = Challenge::where('verified', true)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get()->toArray();
+        switch ($filter) {
+            case 'solved':
+                break;
+            default:
+                $filter = null;
+        }
+
+        if ($filter) {
+            $challenges = Challenge::where('verified', true)->where($filter, false)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get()->toArray();
+        } else {
+            $challenges = Challenge::where('verified', true)->limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get()->toArray();
+        }
         $hasNext = (sizeof($challenges) === $limit && array_pop($challenges) !== null);
 
         return response([
