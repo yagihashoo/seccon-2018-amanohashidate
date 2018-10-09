@@ -17,3 +17,4 @@ Route::resource('user', 'Api\UserController', ['only' => ['index', 'show']]);
 Route::get('me', 'Api\UserController@me');
 
 Route::resource('challenge', 'Api\ChallengeController', ['only' => ['index', 'show', 'update', 'create']]);
+Route::resource('promotion_request', 'Api\PromotionRequestController', ['only' => ['index', 'show', 'update', 'create']]);
