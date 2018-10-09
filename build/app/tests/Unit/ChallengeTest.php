@@ -31,27 +31,28 @@ class ChallengeTest extends TestCase
         ]);
     }
 
-    public function testChallengeGeneration()
+    protected static function createChallenge(User $setter): Challenge
     {
-        $setter = self::createUser(User::ROLE_SETTER);
-        $challenge = Challenge::create([
+        return Challenge::create([
             'title' => str_random(),
             'model_answer' => '#<svg onload=alert(/XSS/.source)>',
             'setter_id' => $setter->id,
             'file_id' => Uuid::generate(4)->string,
+            'from_ip' => '0.0.0.0',
         ]);
+    }
+
+    public function testChallengeGeneration()
+    {
+        $setter = self::createUser(User::ROLE_SETTER);
+        $challenge = self::createChallenge($setter);
         $this->assertNotNull($challenge);
     }
 
     public function testVerifyChallengeSuccess()
     {
         $setter = self::createUser(User::ROLE_SETTER);
-        $challenge = Challenge::create([
-            'title' => str_random(),
-            'model_answer' => '#<svg onload=alert(/XSS/.source)>',
-            'setter_id' => $setter->id,
-            'file_id' => Uuid::generate(4)->string,
-        ]);
+        $challenge = self::createChallenge($setter);
         $challenge->verify();
         $this->assertTrue($challenge->verified);
     }
@@ -59,15 +60,10 @@ class ChallengeTest extends TestCase
     public function testVerifyChallengeFail()
     {
         $setter = self::createUser(User::ROLE_SETTER);
-        $challenge = Challenge::create([
-            'title' => str_random(),
-            'model_answer' => '#<svg onload=alert(/XSS/.source)>',
-            'setter_id' => $setter->id,
-            'file_id' => Uuid::generate(4)->string,
-            'verified' => true,
-        ]);
+        $challenge = self::createChallenge($setter);
 
         try {
+            $challenge->verify();
             $challenge->verify();
         } catch (Exception $e) {
             $this->assertInstanceOf(VerifiedChallengeException::class, $e);
@@ -77,12 +73,7 @@ class ChallengeTest extends TestCase
     public function testSolveChallengeSuccess()
     {
         $setter = self::createUser(User::ROLE_SETTER);
-        $challenge = Challenge::create([
-            'title' => str_random(),
-            'model_answer' => '#<svg onload=alert(/XSS/.source)>',
-            'setter_id' => $setter->id,
-            'file_id' => Uuid::generate(4)->string,
-        ]);
+        $challenge = self::createChallenge($setter);
         $challenge->solve();
         $this->assertTrue($challenge->solved);
     }
@@ -90,15 +81,10 @@ class ChallengeTest extends TestCase
     public function testSolveChallengeFail()
     {
         $setter = self::createUser(User::ROLE_SETTER);
-        $challenge = Challenge::create([
-            'title' => str_random(),
-            'model_answer' => '#<svg onload=alert(/XSS/.source)>',
-            'setter_id' => $setter->id,
-            'file_id' => Uuid::generate(4)->string,
-            'solved' => true,
-        ]);
+        $challenge = self::createChallenge($setter);
 
         try {
+            $challenge->solve();
             $challenge->solve();
         } catch (Exception $e) {
             $this->assertInstanceOf(SolvedChallengeException::class, $e);
