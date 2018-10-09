@@ -26,7 +26,7 @@ class UserController extends Controller
         $limit = (min(Input::get('limit'), 100) ?? 100) + 1;
         $offset = Input::get('offset') ?? 0;
 
-        $users = User::limit($limit)->offset($offset)->orderBy('name')->get()->toArray();
+        $users = User::limit($limit)->offset($offset)->orderBy('created_at', 'desc')->get()->toArray();
         $hasNext = (sizeof($users) === $limit && array_pop($users) !== null);
 
         return response([
