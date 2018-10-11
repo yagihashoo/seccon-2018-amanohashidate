@@ -6,16 +6,12 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/php:7.2.10-zts-node-browsers
         environment:
             - DB_HOST: 127.0.0.1
             - DB_USERNAME: 'root'
             - DB_PASSWORD: ''
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:5.7
         environment:
             - MYSQL_ALLOW_EMPTY_PASSWORD: yes
@@ -27,11 +23,9 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
+      - retore_cache:
           keys:
           - v1-dependencies-{{ checksum "build/app/composer.json" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
@@ -67,8 +61,66 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "build/app/composer.json" }}
 
-      # run tests!
+  test-server:
+    docker:
+      - image: circleci/php:7.2.10-zts-node-browsers
+        environment:
+            - DB_HOST: 127.0.0.1
+            - DB_USERNAME: 'root'
+            - DB_PASSWORD: ''
+
+      - image: circleci/mysql:5.7
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+            - MYSQL_ROOT_PASSWORD: ''
+            - MYSQL_DATABASE: app
+
+    working_directory: ~/repo
+
+    steps:
+      - retore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build/app/composer.json" }}
+          - v1-dependencies-
+
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql pcntl
+
+      - run:
+          name: Install dependent packages for PHP
+          command: composer install -n --prefer-dist
+          working_directory: build/app
+
+      - run:
+          name: Setting up enviroment
+          command: cp _env .env && php artisan key:generate
+          working_directory: build/app
+
+      - run:
+          name: Waiting for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+
+      - run:
+          name: Install dependent packages for Node
+          command: npm install
+          working_directory: build/app
+
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "build/app/composer.json" }}
+
       - run:
           name: PHPUnit
           command: vendor/bin/phpunit
           working_directory: build/app
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
