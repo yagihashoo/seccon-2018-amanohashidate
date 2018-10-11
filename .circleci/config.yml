@@ -115,12 +115,11 @@ jobs:
           name: PHPUnit
           command: vendor/bin/phpunit
           working_directory: build/app
-
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - test:
+      - test-server:
         requires:
           - build
