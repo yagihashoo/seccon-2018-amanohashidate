@@ -1,4 +1,5 @@
 # 天橋立
+[![CircleCI](https://circleci.com/gh/yagihashoo/seccon-2018-amanohashidate/tree/master.svg?style=svg&circle-token=a4896af40a8d9c9f975141a0aaccedaee6357dcf)](https://circleci.com/gh/yagihashoo/seccon-2018-amanohashidate/tree/master)
 
 ## 問題文
 ```html
