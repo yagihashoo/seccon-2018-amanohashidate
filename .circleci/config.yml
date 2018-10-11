@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
 
-      - retore_cache:
+      - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "build/app/composer.json" }}
           - v1-dependencies-
@@ -78,7 +78,7 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - retore_cache:
+      - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "build/app/composer.json" }}
           - v1-dependencies-
