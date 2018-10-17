@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.2.10-zts-node-browsers
+      - image: circleci/php:7.2.11-zts-node-browsers
         environment:
             - DB_HOST: 127.0.0.1
             - DB_USERNAME: 'root'
@@ -63,7 +63,7 @@ jobs:
 
   test-server:
     docker:
-      - image: circleci/php:7.2.10-zts-node-browsers
+      - image: circleci/php:7.2.11-zts-node-browsers
         environment:
             - DB_HOST: 127.0.0.1
             - DB_USERNAME: 'root'
