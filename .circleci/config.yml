@@ -121,13 +121,18 @@ jobs:
 workflows:
   version: 2
   build_and_test:
-    filters:
-      branches:
-        only:
-          - master
-          - develop
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
       - test-server:
           requires:
-          - build
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop
