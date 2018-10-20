@@ -22,6 +22,6 @@ class ChallengePolicy
 
     public function verify(User $user, Challenge $challenge)
     {
-        return $user->role_id === User::ROLE_ADMIN;
+        return $user->id === $challenge->setter_id;
     }
 }

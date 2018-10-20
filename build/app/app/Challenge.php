@@ -51,6 +51,8 @@ class Challenge extends Model
             throw new VerifiedChallengeException();
         }
 
+        // TODO: Implement verification process
+
         $this->verified = true;
         $this->save();
     }

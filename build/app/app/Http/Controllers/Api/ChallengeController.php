@@ -71,12 +71,15 @@ class ChallengeController extends Controller
 
         $challenge->title = $title;
         $challenge->model_answer = $model_answer;
+        $challenge->verified = false;
         $challenge->storeChallengeFile($html);
         $challenge->save();
     }
 
     public function verify(Challenge $challenge)
     {
-        //
+        $this->authorize('verify', Challenge::class);
+
+        $challenge->verify();
     }
 }
