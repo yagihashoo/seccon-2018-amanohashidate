@@ -9,6 +9,11 @@ class PromotionRequestPolicy
 {
     use HandlesAuthorization;
 
+    public function index(User $user)
+    {
+        return $user->role_id === User::ROLE_ADMIN;
+    }
+
     public function create(User $user)
     {
         return $user->role_id === User::ROLE_USER;

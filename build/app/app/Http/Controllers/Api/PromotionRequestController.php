@@ -17,6 +17,8 @@ class PromotionRequestController extends Controller
 
     public function index()
     {
+        $this->authorize('index', PromotionRequest::class);
+
         $limit = (min(Input::get('limit'), 100) ?? 100) + 1;
         $offset = Input::get('offset') ?? 0;
 
