@@ -18,8 +18,8 @@
         "laravel-mix": "2.1.14",
         "lodash": "4.17.11",
         "popper.js": "1.14.4",
-        "react": "16.5.2",
-        "react-dom": "16.5.2"
+        "react": "16.6.0",
+        "react-dom": "16.6.0"
     },
     "engines": {
         "node": "10.12.0",
