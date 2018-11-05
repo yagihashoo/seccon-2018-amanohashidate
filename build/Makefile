@@ -55,3 +55,9 @@ init:
 test-server:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		vendor/bin/phpunit
+
+validate-ci-config:
+	@ cd ../; circleci config validate .circleci/config.yml
+
+local-ci:
+	@ cd ../; circleci build .circleci/config.yml
