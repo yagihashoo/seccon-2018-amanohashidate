@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import Axios from 'axios';
 
 const axiosBase = (cookie) => {
     return Axios.create({
@@ -9,9 +9,9 @@ const axiosBase = (cookie) => {
             'Cookie': cookie,
         },
         responseType: 'json',
-    })
-}
+    });
+};
 
 export {
     axiosBase,
-}
+};
