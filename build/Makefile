@@ -24,7 +24,7 @@ setup-dev:
 		php artisan key:generate
 
 up:
-	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build --remove-orphans
 
 restart:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) restart
