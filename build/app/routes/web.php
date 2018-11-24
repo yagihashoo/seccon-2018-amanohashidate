@@ -14,11 +14,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->get('/', function () {
-    return view('welcome');
+    return redirect('/app');
 })->name('top');
 
-Route::get('/login', function() {
-   return view('login');
+Route::get('/login', function () {
+    return view('login');
 });
 $this->post('login', 'Auth\LoginController@login')->name('login');
 $this->post('register', 'Auth\RegisterController@register')->name('register');
