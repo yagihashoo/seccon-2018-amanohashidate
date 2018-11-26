@@ -1,20 +1,19 @@
 import Axios from 'axios';
 
-const axiosBase = (cookie) => {
+export const axiosBase = (req) => {
     return Axios.create({
         baseURL: 'http://amanohashidate.koth.seccon/api',
-        headers: {
+        headers: req ? {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
-            'Cookie': cookie,
+            'Cookie': req.headers.cookie,
+        } : {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
         },
         responseType: 'json',
         validateStatus: (status) => {
-          return [200].includes(status);
+            return [200].includes(status);
         },
     });
-};
-
-export {
-    axiosBase,
 };

@@ -2,7 +2,7 @@ import Layout from '../../components/layout.js';
 import {axiosBase} from '../../lib/utils.js';
 
 const Index = (props) => (
-    <Layout>
+    <Layout title={"Top"}>
         <ul>
             {props.data.users.map((user, index) => (
                 <li key={user.id}>
@@ -14,9 +14,8 @@ const Index = (props) => (
     </Layout>
 )
 
-
 Index.getInitialProps = async function ({req, res}) {
-    const axios = axiosBase(req.headers.cookie);
+    const axios = axiosBase(req);
     let apiRes;
     try {
         apiRes = await axios.get('/user/');
