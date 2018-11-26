@@ -15,13 +15,13 @@ const Layout = ({children, title = 'XSS Hell'}) => (
                     <a className="siimple-navbar-item">Challenges</a>
                 </Link>
                 <Link href="/app/upload">
-                    <a className="siimple-navbar-item">Upload Challenge</a>
+                    <a className="siimple-navbar-item">Upload</a>
                 </Link>
                 <Link href="/app/upgrade">
-                    <a className="siimple-navbar-item">Upgrade Account</a>
+                    <a className="siimple-navbar-item">Upgrade</a>
                 </Link>
                 <Link href="/app/unsolved">
-                    <a className="siimple-navbar-item">Unsolved Challenges</a>
+                    <a className="siimple-navbar-item">Unsolved</a>
                 </Link>
                 <Link href="/logout">
                     <a className="siimple-navbar-item">Logout</a>
