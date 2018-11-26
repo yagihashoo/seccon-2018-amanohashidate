@@ -1,5 +1,5 @@
 import Layout from '../../components/layout';
-import {axiosBase} from '../../lib/utils.js';
+import {axiosWrapper} from "../../lib/utils";
 
 const Index = (props) => (
     <Layout title={"Profile"}>
@@ -26,7 +26,7 @@ const Index = (props) => (
 
 
 Index.getInitialProps = async function ({req, res}) {
-    const axios = axiosBase(req);
+    const axios = (new axiosWrapper(req)).axios;
     let apiRes;
     try {
         apiRes = await axios.get('/me');

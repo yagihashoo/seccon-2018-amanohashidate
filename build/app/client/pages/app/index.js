@@ -1,5 +1,6 @@
-import Layout from '../../components/layout.js';
-import {axiosBase} from '../../lib/utils.js';
+import Layout from '../../components/layout';
+import {axiosWrapper} from '../../lib/utils';
+import Router from 'next/router'
 
 const Index = (props) => (
     <Layout title={"Top"}>
@@ -15,19 +16,32 @@ const Index = (props) => (
 )
 
 Index.getInitialProps = async function ({req, res}) {
-    const axios = axiosBase(req);
+    const axios = (new axiosWrapper(req)).axios;
     let apiRes;
     try {
         apiRes = await axios.get('/user/');
     } catch (err) {
         const status = err.response.status;
-        switch (status) {
-            case 401:
-                res.redirect('/login');
-                res.end();
-                break;
-            default:
-                res.end();
+        if (req) {
+            switch (status) {
+                case 401:
+                    res.redirect('/login');
+                    res.end();
+                    break;
+                case 403:
+                    res.redirect('/app/me');
+                    res.end();
+                    break;
+            }
+        } else {
+            switch (status) {
+                case 401:
+                    Router.push('/login');
+                    break;
+                case 403:
+                    Router.push('/app/me');
+                    break;
+            }
         }
 
         return {
