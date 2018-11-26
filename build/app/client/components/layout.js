@@ -19,9 +19,6 @@ const Layout = ({children, title = 'Challenges'}) => (
                 <Link href={"/app/upload"}>
                     <a className="siimple-navbar-item siimple-link">Upload</a>
                 </Link>
-                <Link href={"/app/upgrade"}>
-                    <a className="siimple-navbar-item siimple-link">Upgrade</a>
-                </Link>
                 <Link href={"/app/unsolved"}>
                     <a className="siimple-navbar-item siimple-link">Unsolved</a>
                 </Link>
