@@ -1,9 +1,8 @@
-import Header from '../../components/Header.js';
+import Layout from '../../components/layout.js';
 import {axiosBase} from '../../lib/utils.js';
 
 const Index = (props) => (
-    <div>
-        <Header/>
+    <Layout>
         <ul>
             {props.data.users.map((user, index) => (
                 <li key={user.id}>
@@ -12,17 +11,33 @@ const Index = (props) => (
                 </li>
             ))}
         </ul>
-    </div>
+    </Layout>
 )
 
 
-Index.getInitialProps = async function ({req}) {
+Index.getInitialProps = async function ({req, res}) {
     const axios = axiosBase(req.headers.cookie);
-    const res = await axios.get('/user/');
-    const data = res.data;
+    let apiRes;
+    try {
+        apiRes = await axios.get('/user/');
+    } catch (err) {
+        const status = err.response.status;
+        switch (status) {
+            case 401:
+                res.redirect('/login');
+                res.end();
+                break;
+            default:
+                res.end();
+        }
+
+        return {
+            data: {users: []},
+        };
+    }
 
     return {
-        data: data,
+        data: apiRes.data,
     };
 };
 

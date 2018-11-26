@@ -9,6 +9,9 @@ const axiosBase = (cookie) => {
             'Cookie': cookie,
         },
         responseType: 'json',
+        validateStatus: (status) => {
+          return [200].includes(status);
+        },
     });
 };
 

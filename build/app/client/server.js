@@ -10,6 +10,9 @@ app.prepare()
         const server = express();
 
         server.get('*', (req, res) => {
+            if (!req.headers.cookie) {
+                res.redirect('/login');
+            }
             return handle(req, res);
         });
 
