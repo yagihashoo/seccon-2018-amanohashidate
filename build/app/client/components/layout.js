@@ -2,35 +2,47 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 const Layout = ({children, title = 'XSS Hell'}) => (
-    <div>
+    <div id="wrap">
         <Head>
             <title>{title}</title>
+            <link rel="stylesheet" href="/css/siimple.min.css"/>
+            <link rel="stylesheet" href="/css/app.css"/>
         </Head>
-        <header>
-            <Link href="/">
-                <a>Challenges</a>
-            </Link>
-            <Link href="/upload">
-                <a>Upload Challenge</a>
-            </Link>
-            <Link href="/upgrade">
-                <a>Upgrade account</a>
-            </Link>
-            <Link href="/unsolved">
-                <a>Unsolved Challenges</a>
-            </Link>
+        <header className="siimple-navbar">
+            <a className="siimple-navbar-title">XSS Hell</a>
+            <div className="siimple--float-right">
+                <Link href="/app">
+                    <a className="siimple-navbar-item">Challenges</a>
+                </Link>
+                <Link href="/app/upload">
+                    <a className="siimple-navbar-item">Upload Challenge</a>
+                </Link>
+                <Link href="/app/upgrade">
+                    <a className="siimple-navbar-item">Upgrade Account</a>
+                </Link>
+                <Link href="/app/unsolved">
+                    <a className="siimple-navbar-item">Unsolved Challenges</a>
+                </Link>
+                <Link href="/logout">
+                    <a className="siimple-navbar-item">Logout</a>
+                </Link>
+            </div>
         </header>
-        <div id="wrap">{children}</div>
+        <div className="siimple-rule"></div>
+        <div class="content">{children}</div>
+        <div className="siimple-rule"></div>
         <footer>
+            ©Yu YAGIHASHI, Developed For SECCON CTF 2018
         </footer>
         <style jsx>{`
-        a {
-            color: red;
-        }
+            header {
+                padding: 20px;
+            }
 
-        a:hover {
-            color: blue;
-        }
+            footer {
+                text-align: right;
+                padding: 20px;
+            }
         `}</style>
     </div>
 );
