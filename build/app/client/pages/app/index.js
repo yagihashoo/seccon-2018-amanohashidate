@@ -5,10 +5,10 @@ import Router from 'next/router'
 const Index = (props) => (
     <Layout title={"Top"}>
         <ul>
-            {props.data.users.map((user, index) => (
-                <li key={user.id}>
-                    <p>{user.id}</p>
-                    <p>{user.name}</p>
+            {props.data.challenges.map((challenge) => (
+                <li key={challenge.id}>
+                    <p>{challenge.id}</p>
+                    <p>{challenge.name}</p>
                 </li>
             ))}
         </ul>
@@ -19,7 +19,7 @@ Index.getInitialProps = async function ({req, res}) {
     const axios = (new axiosWrapper(req)).axios;
     let apiRes;
     try {
-        apiRes = await axios.get('/user/');
+        apiRes = await axios.get('/challenge/');
     } catch (err) {
         const status = err.response.status;
         if (req) {
@@ -45,7 +45,7 @@ Index.getInitialProps = async function ({req, res}) {
         }
 
         return {
-            data: {users: []},
+            data: {challenges: []},
         };
     }
 
