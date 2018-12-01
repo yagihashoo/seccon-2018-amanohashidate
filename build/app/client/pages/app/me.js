@@ -1,26 +1,27 @@
 import Layout from '../../components/layout';
 import {axiosWrapper} from "../../lib/utils";
+import bulma from 'bulma';
 
 const Index = (props) => (
     <Layout title={"Profile"}>
-        <div id="table" className="siimple-table siimple-table--striped">
-            <div className="siimple-table-header">
-                <div className="siimple-table-row">
-                    <div className="siimple-table-cell">name</div>
-                    <div className="siimple-table-cell">value</div>
-                </div>
-            </div>
-            <div className="siimple-table-body">
-                <div className="siimple-table-row">
-                    <div className="siimple-table-cell">id</div>
-                    <div className="siimple-table-cell">{props.user.id}</div>
-                </div>
-                <div className="siimple-table-row">
-                    <div className="siimple-table-cell">name</div>
-                    <div className="siimple-table-cell">{props.user.name}</div>
-                </div>
-            </div>
-        </div>
+        <table className={bulma.table + ' ' + bulma['is-fullwidth']}>
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>id</td>
+                <td>{props.user.id}</td>
+            </tr>
+            </tbody>
+            <tr>
+                <td>name</td>
+                <td>{props.user.name}</td>
+            </tr>
+        </table>
     </Layout>
 )
 

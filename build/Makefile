@@ -52,6 +52,10 @@ init:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		php artisan migrate:refresh --seed
 
+rebuild-node-sass:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec next \
+		npm rebuild node-sass
+
 test-server:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		vendor/bin/phpunit

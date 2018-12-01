@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Amanohashidate</title>
-    <link href="{{ asset('css/siimple.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bulma.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
