@@ -2,7 +2,7 @@ import Layout from '../../components/layout';
 import {axiosWrapper} from "../../lib/utils";
 import bulma from 'bulma';
 
-const Index = (props) => (
+const Me = (props) => (
     <Layout title={"Profile"}>
         <table className={bulma.table + ' ' + bulma['is-fullwidth']}>
             <thead>
@@ -26,7 +26,7 @@ const Index = (props) => (
 )
 
 
-Index.getInitialProps = async function ({req, res}) {
+Me.getInitialProps = async function ({req, res}) {
     const axios = (new axiosWrapper(req)).axios;
     let apiRes;
     try {
@@ -52,4 +52,4 @@ Index.getInitialProps = async function ({req, res}) {
     };
 };
 
-export default Index;
+export default Me;
