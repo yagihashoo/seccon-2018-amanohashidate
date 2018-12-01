@@ -11,7 +11,7 @@
 </head>
 <body>
 <div>
-    <div class="content">
+    <div class="content" style="padding-top:20px">
         @yield('content')
     </div>
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>XSS Hell</h1>
+    <h1 class="title is-1">XSS Hell</h1>
     <form method="post">
         <div class="field">
             <label>Username:<input class="input" name="name" type="text" placeholder="username" autofocus>
