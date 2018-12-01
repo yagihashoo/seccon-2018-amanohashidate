@@ -18,7 +18,7 @@ const Layout = ({children, title = 'Challenges'}) => (
                         <Link href={"/app"}>
                             <a className={bulma['navbar-item']}>Challenges</a>
                         </Link>
-                        <Link href={"/app/uplaod"}>
+                        <Link href={"/app/upload"}>
                             <a className={bulma['navbar-item']}>Upload</a>
                         </Link>
                         <Link href={"/app/unsolved"}>
