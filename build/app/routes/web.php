@@ -13,9 +13,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->get('/', function () {
-    return redirect('/app');
-})->name('top');
+Route::group(['middleware' => ['auth']], function () {
+    $this->get('/', 'TopController@index')->name('top');
+    $this->get('upload', 'TopController@index')->name('upload');
+    $this->get('unsolved', 'TopController@index')->name('unsolved');
+    $this->get('me', 'TopController@index')->name('me');
+});
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login');
