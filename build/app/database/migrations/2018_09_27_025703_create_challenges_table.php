@@ -15,7 +15,7 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->string('title', 128)->default('');
+            $table->string('title', 64)->default('');
             $table->string('model_answer', 512)->default('');
             $table->boolean('verified')->default(false);
             $table->boolean('solved')->default(false);

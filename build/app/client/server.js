@@ -9,6 +9,12 @@ app.prepare()
     .then(() => {
         const server = express();
 
+        server.get('/app/c/:id', (req, res) => {
+            const actualPage = '/app/challenge'
+            const queryParams = {id: req.params.id}
+            app.render(req, res, actualPage, queryParams)
+        })
+
         server.get('*', (req, res) => {
             if (!req.headers.cookie) {
                 res.redirect('/login');

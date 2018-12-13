@@ -21,9 +21,6 @@ const Layout = ({children, title = 'Challenges'}) => (
                         <Link href={"/app/upload"}>
                             <a className={bulma['navbar-item']}>Upload</a>
                         </Link>
-                        <Link href={"/app/unsolved"}>
-                            <a className={bulma['navbar-item']}>Unsolved</a>
-                        </Link>
                         <Link href={"/app/me"}>
                             <a className={bulma['navbar-item']}>Profile</a>
                         </Link>
@@ -45,26 +42,3 @@ const Layout = ({children, title = 'Challenges'}) => (
 );
 
 export default Layout;
-
-/*
- <Link href={"/app"}>
-                <a className="siimple-navbar-title siimple-link">XSS Hell</a>
-            </Link>
-            <div className="siimple--float-right">
-                <Link href={"/app"}>
-                    <a className="siimple-navbar-item siimple-link">Challenges</a>
-                </Link>
-                <Link href={"/app/upload"}>
-                    <a className="siimple-navbar-item siimple-link">Upload</a>
-                </Link>
-                <Link href={"/app/unsolved"}>
-                    <a className="siimple-navbar-item siimple-link">Unsolved</a>
-                </Link>
-                <Link href={"/app/me"}>
-                    <a className="siimple-navbar-item siimple-link">Profile</a>
-                </Link>
-                <Link href={"/logout"}>
-                    <a className="siimple-navbar-item siimple-link">Logout</a>
-                </Link>
-            </div>
- */
