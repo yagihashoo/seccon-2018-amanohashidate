@@ -9,17 +9,21 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->get('/', function () {
-    return redirect('/app');
-})->name('top');
-
-Route::get('/login', function () {
-    return view('login');
+Route::group(['middleware' => ['auth']], function () {
+    $this->get('/', 'TopController@index')->name('top');
+    $this->get('upload', 'UploadController@index')->name('upload');
+    $this->get('unsolved', 'UnsolvedController@index')->name('unsolved');
+    $this->get('me', 'meController@index')->name('me');
 });
-$this->post('login', 'Auth\LoginController@login')->name('login');
-$this->post('register', 'Auth\RegisterController@register')->name('register');
+
+$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('login', 'Auth\LoginController@login');
+
+$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post('register', 'Auth\RegisterController@register');
+
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');

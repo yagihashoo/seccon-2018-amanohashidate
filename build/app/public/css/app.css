@@ -7,3 +7,12 @@ div.content {
     max-width: 900px;
     margin: auto;
 }
+
+header {
+    padding: 20px;
+}
+
+footer {
+    text-align: right;
+    padding: 20px;
+}
