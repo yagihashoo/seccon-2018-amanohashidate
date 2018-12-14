@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function () {
     $this->get('/', 'TopController@index')->name('top');
     $this->get('upload', 'UploadController@index')->name('upload');
-    $this->get('unsolved', 'UnsolvedController@index')->name('unsolved');
     $this->get('me', 'meController@index')->name('me');
 });
 

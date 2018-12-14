@@ -19,7 +19,6 @@
                     <div class="navbar-end">
                         <a href="{{ route('top') }}" class="navbar-item">Challenges</a>
                         <a href="{{ route('upload') }}" class="navbar-item">Upload</a>
-                        <a href="{{ route('unsolved') }}" class="navbar-item">Unsolved</a>
                         <a href="{{ route('me') }}" class="navbar-item">Profile</a>
                         <a href="{{ route('logout') }}" class="navbar-item">Logout</a>
                     </div>
