@@ -2,10 +2,24 @@
 @section('title', 'Top')
 
 @section('content')
-<ul>
-    <li key={challenge.id}>
-        <p>{challenge.id}</p>
-        <p>{challenge.name}</p>
-    </li>
-</ul>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>IP</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse ($challenges as $challenge)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td><a href="{{ route('challenge', ['id' => $challenge['id']]) }}">{{ $challenge['title'] }}</a></td>
+                <td>{{ $challenge['from_ip'] }}</td>
+            </tr>
+        @empty
+            No challenge yet
+        @endforelse
+        </tbody>
+    </table>
 @endsection

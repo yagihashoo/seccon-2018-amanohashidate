@@ -14,18 +14,19 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function () {
-    $this->get('/', 'TopController@index')->name('top');
-    $this->get('upload', 'UploadController@index')->name('upload');
-    $this->get('me', 'meController@index')->name('me');
+    Route::get('/', 'ChallengeController@index')->name('top');
+    Route::get('/challenge/{id}', 'ChallengeController@detail')->name('challenge');
+    Route::get('/upload', 'UploadController@index')->name('upload');
+    Route::get('/me', 'MeController@index')->name('me');
 });
 
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('login', 'Auth\LoginController@login');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
 
-$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('register', 'Auth\RegisterController@register');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/register', 'Auth\RegisterController@register');
 
-$this->get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // This must be open for defense point crawling
-$this->get('unsolved', 'UnsolvedController@index')->name('unsolved');
+Route::get('/unsolved', 'UnsolvedController@index')->name('unsolved');

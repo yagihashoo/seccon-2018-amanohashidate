@@ -33,7 +33,6 @@ class Challenge extends Model
      * @var array
      */
     protected $hidden = [
-        'from_ip',
         'model_answer',
     ];
 
