@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use App\Challenge;
 
 class TopController extends Controller
 {
     public function index()
     {
-        return view('top');
+        $challenges = $challenges = Challenge::where('verified', true)->orderBy('created_at', 'asc')->paginate(20);
+
+        return view('top')->with('challenges', $challenges);
     }
 }

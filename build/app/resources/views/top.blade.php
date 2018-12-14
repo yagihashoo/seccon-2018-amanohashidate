@@ -2,10 +2,22 @@
 @section('title', 'Top')
 
 @section('content')
-<ul>
-    <li key={challenge.id}>
-        <p>{challenge.id}</p>
-        <p>{challenge.name}</p>
-    </li>
-</ul>
+
+ <table class="table is-fullwidth is-striped">
+    <thead>
+        <th>id</th>
+        <th>title</th>
+    </thead>
+    <tbody>
+    @foreach( $challenges as $challenge)
+        <tr>
+            <td>{{ $challenge->id }}</td>
+            <td>
+                <a href="/challenge?id={{ $challenge->id }}">{{ $challenge->title }}</a>
+            </td>
+        </tr>
+    @endforeach
+    </tbody>
+ </table>
+ {{ $challenges->links() }}
 @endsection
