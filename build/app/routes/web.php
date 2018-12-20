@@ -20,8 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/challenge/{id}', 'ChallengeController@detail')->name('challenge');
     Route::post('/challenge/{id}/answer', 'ChallengeController@answer')->name('answer');
     Route::get('/challenge/{id}/download', 'ChallengeController@download')->name('download');
+    Route::get('/upload', 'ChallengeController@upload')->name('upload');
+    Route::post('/challenge/create', 'ChallengeController@create')->name('create');
+    Route::post('/challenge/{id}/update', 'ChallengeController@update')->name('update');
 
-    Route::get('/upload', 'UploadController@index')->name('upload');
     Route::get('/me', 'MeController@index')->name('me');
 });
 

@@ -24,11 +24,15 @@ class Challenge extends Model
     protected $fillable = [
         'id',
         'title',
+        'html',
         'model_answer',
         'status',
         'setter_id',
         'file_id',
-        'from_ip',
+        'from_ip0',
+        'from_ip1',
+        'from_ip2',
+        'from_ip3',
     ];
 
     /**

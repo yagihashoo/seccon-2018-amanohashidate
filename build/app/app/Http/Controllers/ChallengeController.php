@@ -7,6 +7,7 @@ use App\Submit;
 use App\Challenge;
 use App\Jobs\ChallengeAnswer;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
 class ChallengeController extends Controller
@@ -35,6 +36,7 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::findOrFail($id);
         $payload = Request::input('payload');
+        $from_ip = explode('.', $_SERVER['REMOTE_ADDR']);
 
         if ($challenge['solved']) {
             abort(403);
@@ -44,8 +46,8 @@ class ChallengeController extends Controller
             abort(400);
         }
 
-        if ($challenge->setter_id === Auth::user()->id) {
-            Request::session()->flash('error', 'This is your own challenge');
+        if ($challenge->from_ip2 === $from_ip[2]) {
+            Request::session()->flash('error', 'This is the challenge of your team');
         } else {
             $submit = Submit::create([
                 'payload' => $payload,
@@ -60,9 +62,49 @@ class ChallengeController extends Controller
         return redirect("/challenge/{$id}");
     }
 
-    public function new()
+    public function upload()
     {
-        // TODO: Implement proper access control based on Team IP
+        return view('upload');
+    }
+
+    public function create()
+    {
+        $user = Auth::user();
+        $title = Request::input('title');
+        $html = Request::input('html');
+        $model_answer = Request::input('model_answer');
+        $from_ip = explode('.', $_SERVER['REMOTE_ADDR']);
+
+        $existingChallenge = Challenge::where('from_ip2', $from_ip[2])
+            ->whereIn('status', [Challenge::$status_verified, Challenge::$status_none, Challenge::$status_failed])
+            ->get();
+
+        if (sizeof($existingChallenge) > 0) {
+            Request::session()->flash('error', 'The challenge of your team is still alive');
+        } else {
+            $challenge = Challenge::create([
+                'setter_id' => $user->id,
+                'title' => $title,
+                'html' => $html,
+                'model_answer' => $model_answer,
+                'from_ip0' => $from_ip[0],
+                'from_ip1' => $from_ip[1],
+                'from_ip2' => $from_ip[2],
+                'from_ip3' => $from_ip[3],
+
+            ]);
+
+            ChallengeVerify::dispatch($challenge, $model_answer)->onQueue('verify');
+            Request::session()->flash('message', 'Queued, wait a while for verification');
+        }
+        return redirect("/upload");
+    }
+
+    public function update($id)
+    {
+        $user = Auth::user();
+        $title = Request::input('title');
+
 
         ChallengeVerify::dispatch()->onQueue('verify');
         return redirect("/");

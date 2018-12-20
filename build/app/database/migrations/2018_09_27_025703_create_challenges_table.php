@@ -18,7 +18,10 @@ class CreateChallengesTable extends Migration
             $table->string('title', 64)->default('');
             $table->string('model_answer', 256)->default('');
             $table->string('status')->default(\App\Challenge::$status_none);
-            $table->string('from_ip');
+            $table->string('from_ip0');
+            $table->string('from_ip1');
+            $table->string('from_ip2');
+            $table->string('from_ip3');
             $table->uuid('setter_id');
             $table->string('html', 4096);
             $table->timestamps();

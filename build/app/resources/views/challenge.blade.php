@@ -13,6 +13,10 @@
             <td>{{ $challenge->setter_id }}</td>
         </tr>
         <tr>
+            <th>From IP:</th>
+            <td>{{ $challenge->from_ip0 }}.{{ $challenge->from_ip1 }}.{{ $challenge->from_ip2 }}.{{ $challenge->from_ip3 }}</td>
+        </tr>
+        <tr>
             <th>Created at:</th>
             <td>{{ $challenge->created_at }}</td>
         </tr>
@@ -25,7 +29,7 @@
     <a href="/challenge/{{ $challenge->id }}/download">
         <button class="button is-link">Download</button>
     </a>
-    <form action="/challenge/{{$challenge->id}}/answer" method="post">
+    <form action="{{ route('answer', $challenge->id) }}" method="post">
         <h3 class="title is-3">Payload submission</h3>
         @if(\Illuminate\Support\Facades\Session::has('message'))
             <span class="tag is-info is-medium">{{ session('message') }}</span>
@@ -33,9 +37,8 @@
             <span class="tag is-warning is-medium">{{ session('error') }}</span>
         @endif
         <input class="input" type="text" name="payload"
-               placeholder="Payload will be put like `/?${payload}`" maxlength="256">
+               placeholder="Payload will be passed like `/?${payload}`" maxlength="256">
         <input class="button" type="submit" value="submit">
         @csrf
     </form>
-    @endif
 @endsection

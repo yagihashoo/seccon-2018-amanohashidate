@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td><a href="{{ route('challenge', ['id' => $challenge['id']]) }}">{{ $challenge['title'] }}</a></td>
-                <td>{{ $challenge['from_ip'] }}</td>
+                <td>{{ $challenge['from_ip0'] }}.{{ $challenge['from_ip1'] }}.{{ $challenge['from_ip2'] }}.{{ $challenge['from_ip3'] }}</td>
             </tr>
         @empty
             No challenge yet
