@@ -9,6 +9,7 @@ const failMsg = process.env.fail;
 const server = http.createServer((req, res) => {
     res.writeHead(200, {
         'Content-Type': 'text/html; charset=utf-8',
+        'Content-Security-Policy': "default-src: 'self' 'unsafe-inline' 'unsafe-eval'",
     });
     res.end(html);
 }).listen(8000, '127.0.0.1');
