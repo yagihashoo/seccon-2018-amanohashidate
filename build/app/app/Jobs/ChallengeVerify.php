@@ -51,7 +51,7 @@ class ChallengeVerify implements ShouldQueue
             'html' => $html,
             'answer' => $answer,
             'success' => Challenge::$status_verified,
-            'fail' => Challenge::$status_fail,
+            'fail' => Challenge::$status_failed,
         ];
 
         $process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);

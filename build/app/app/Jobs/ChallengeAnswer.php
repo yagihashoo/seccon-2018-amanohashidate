@@ -50,7 +50,7 @@ class ChallengeAnswer implements ShouldQueue
             'html' => $html,
             'answer' => $answer,
             'success' => Challenge::$status_verified,
-            'fail' => Challenge::$status_fail,
+            'fail' => Challenge::$status_failed,
         ];
 
         $process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);
@@ -61,7 +61,7 @@ class ChallengeAnswer implements ShouldQueue
 
             if ($result === Challenge::$status_verified) {
                 Challenge::where('id', $this->challenge['id'])->update([
-                    'solved' => true,
+                    'status' => Challenge::$status_solved,
                 ]);
             }
 

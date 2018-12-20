@@ -14,7 +14,7 @@ class ChallengesTableSeeder extends Seeder
     {
         DB::table('challenges')->insert([
             'id' => Uuid::generate(4),
-            'title' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            'title' => 'verifiedaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
             'model_answer' => 'alert(/XSS/.source)',
             'from_ip' => '10.0.1.1',
             'setter_id' => 'ad4fdc78-db6f-406b-86a4-adfeaa27fe56',
@@ -25,6 +25,46 @@ class ChallengesTableSeeder extends Seeder
         ]);
 
         sleep(1);
+
+        DB::table('challenges')->insert([
+            'id' => Uuid::generate(4),
+            'title' => 'noneaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            'model_answer' => 'alert(/XSS/.source)',
+            'from_ip' => '10.0.1.1',
+            'setter_id' => 'ad4fdc78-db6f-406b-86a4-adfeaa27fe56',
+            'html' => '<script>eval(decodeURIComponent(location.search.substr(1)))</script>',
+            'status' => \App\Challenge::$status_none,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+
+        sleep(1);
+
+        DB::table('challenges')->insert([
+            'id' => Uuid::generate(4),
+            'title' => 'failaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            'model_answer' => 'alert(/XSS/.source)',
+            'from_ip' => '10.0.1.1',
+            'setter_id' => 'ad4fdc78-db6f-406b-86a4-adfeaa27fe56',
+            'html' => '<script>eval(decodeURIComponent(location.search.substr(1)))</script>',
+            'status' => \App\Challenge::$status_failed,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+
+        sleep(1);
+
+        DB::table('challenges')->insert([
+            'id' => Uuid::generate(4),
+            'title' => 'solvedaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            'model_answer' => 'alert(/XSS/.source)',
+            'from_ip' => '10.0.1.1',
+            'setter_id' => 'ad4fdc78-db6f-406b-86a4-adfeaa27fe56',
+            'html' => '<script>eval(decodeURIComponent(location.search.substr(1)))</script>',
+            'status' => \App\Challenge::$status_solved,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
 
         DB::table('challenges')->insert([
             'id' => Uuid::generate(4),
@@ -59,8 +99,7 @@ class ChallengesTableSeeder extends Seeder
             'from_ip' => '10.0.4.1',
             'setter_id' => 'ad4fdc78-db6f-406b-86a4-adfeaa27fe59',
             'html' => '<script>eval(decodeURIComponent(location.search.substr(1)))</script>',
-            'status' => \App\Challenge::$status_verified,
-            'solved' => true,
+            'status' => \App\Challenge::$status_solved,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

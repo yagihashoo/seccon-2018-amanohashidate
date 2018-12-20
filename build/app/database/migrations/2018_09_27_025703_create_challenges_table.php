@@ -18,7 +18,6 @@ class CreateChallengesTable extends Migration
             $table->string('title', 64)->default('');
             $table->string('model_answer', 512)->default('');
             $table->string('status')->default(\App\Challenge::$status_none);
-            $table->boolean('solved')->default(false);
             $table->string('from_ip');
             $table->uuid('setter_id');
             $table->string('html', 4096);

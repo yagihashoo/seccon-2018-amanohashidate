@@ -12,7 +12,7 @@ class ChallengeController extends Controller
     public function index()
     {
         return view('top')->with([
-            'challenges' => Challenge::where('status', 'VERIFIED')->where('solved', false)->orderBy('id', 'asc')->get()->toArray(),
+            'challenges' => Challenge::where('status', 'VERIFIED')->orderBy('id', 'asc')->get()->toArray(),
         ]);
     }
 

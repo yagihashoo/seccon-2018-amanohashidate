@@ -11,7 +11,8 @@ class Challenge extends Model
 {
     public static $status_none = 'NONE';
     public static $status_verified = 'VERIFIED';
-    public static $status_fail = 'FAIL';
+    public static $status_solved = 'SOLVED';
+    public static $status_failed = 'FAILED';
 
     public $incrementing = false;
 
@@ -25,7 +26,6 @@ class Challenge extends Model
         'title',
         'model_answer',
         'status',
-        'solved',
         'setter_id',
         'file_id',
         'from_ip',
