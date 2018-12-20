@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'ChallengeController@index')->name('top');
+
     Route::get('/challenge/{id}', 'ChallengeController@detail')->name('challenge');
+    Route::post('/challenge/{id}/answer', 'ChallengeController@answer')->name('answer');
+
     Route::get('/upload', 'UploadController@index')->name('upload');
     Route::get('/me', 'MeController@index')->name('me');
 });

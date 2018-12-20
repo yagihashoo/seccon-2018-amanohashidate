@@ -51,6 +51,8 @@ migrate:
 init:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		php artisan migrate:refresh --seed
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec -w /home/worker/app/worker worker \
+		npm install
 
 rebuild-node-sass:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec next \

@@ -65,6 +65,14 @@ return [
             'block_for' => null,
         ],
 
+        'verify' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'verify',
+            'retry_after' => 90,
+            'block_for' => null,
+        ],
+
     ],
 
     /*

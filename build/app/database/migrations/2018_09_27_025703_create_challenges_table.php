@@ -17,11 +17,11 @@ class CreateChallengesTable extends Migration
             $table->uuid('id')->unique();
             $table->string('title', 64)->default('');
             $table->string('model_answer', 512)->default('');
-            $table->boolean('verified')->default(false);
+            $table->string('status')->default(\App\Challenge::$status_none);
             $table->boolean('solved')->default(false);
             $table->string('from_ip');
             $table->uuid('setter_id');
-            $table->uuid('file_id')->unique();
+            $table->string('html', 4096);
             $table->timestamps();
         });
     }

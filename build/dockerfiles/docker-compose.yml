@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   amanohashidate.koth.seccon:
@@ -20,6 +20,7 @@ services:
     depends_on:
       - mysql
       - redis
+      - worker
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       TZ: "Asia/Tokyo"
@@ -42,12 +43,23 @@ services:
     image: redis:4.0.11
     restart: always
 
-#  worker:
-#    build: ./worker
-#    depends_on:
-#      - redis
-#      - npm
-#    volumes:
-#      - .:/home/worker/worker
-#    restart: always
+  worker:
+    build: ./worker
+    depends_on:
+      - redis
+    working_dir: /home/worker/app
+    volumes:
+      - ../app:/home/worker/app
+    command: php artisan queue:listen --queue=default,verify
+    restart: always
+
+  verifier:
+    build: ./worker
+    depends_on:
+      - redis
+    working_dir: /home/worker/app
+    volumes:
+      - ../app:/home/worker/app
+    command: php artisan queue:listen --queue=verify,default
+    restart: always
 

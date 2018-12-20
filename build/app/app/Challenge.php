@@ -9,6 +9,10 @@ use Webpatser\Uuid\Uuid;
 
 class Challenge extends Model
 {
+    public static $status_none = 'NONE';
+    public static $status_verified = 'VERIFIED';
+    public static $status_fail = 'FAIL';
+
     public $incrementing = false;
 
     /**
@@ -20,7 +24,7 @@ class Challenge extends Model
         'id',
         'title',
         'model_answer',
-        'verified',
+        'status',
         'solved',
         'setter_id',
         'file_id',
