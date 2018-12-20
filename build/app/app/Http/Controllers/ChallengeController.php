@@ -38,4 +38,12 @@ class ChallengeController extends Controller
         ChallengeVerify::dispatch()->onQueue('verify');
         return redirect("/");
     }
+
+    public function download($id)
+    {
+        $challenge = Challenge::findOrFail($id);
+        return response($challenge['html'], 200)
+            ->header('Content-Type', 'text/plain')
+            ->header('Content-Disposition', sprintf('attachment; filename="%s.html"', $id));
+    }
 }

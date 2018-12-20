@@ -21,12 +21,12 @@
 			</tr>
 		</tbody>
 	<table>
-    <a href="/challenge/{{ $challenge->file_id }}">
-        <button class="button is-link">Donwload</button>
+    <a href="/challenge/{{ $challenge->id }}/download">
+        <button class="button is-link">Download</button>
     </a>
         <form action="/challenge/{{$challenge->id}}/answer" method="post">
         	<h3 class="title is-3">Payload submission</h3>
-            <input class="input" type="text" name="payload" placeholder="#alert(/XSS/.source)"/>
+            <input class="input" type="text" name="payload" placeholder="Payload will be put like `/?${payload}`"/>
             <input class="button" type="submit" value="submit"/>
             @csrf
         </form>
