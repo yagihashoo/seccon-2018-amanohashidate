@@ -25,7 +25,6 @@
         <thead>
         <th>status</th>
         <th>id</th>
-        <th>title</th>
         </thead>
         <tbody>
         @foreach( $challenges as $challenge)
@@ -41,8 +40,7 @@
                         <span class="tag is-danger">FAILED</span>
                     @endif
                 </td>
-                <td>{{ $challenge->id }}</td>
-                <td>{{ $challenge->title }}</td>
+                <td><a href="{{ route('update-index', $challenge->id) }}">{{ $challenge->id }}</a></td>
             </tr>
         @endforeach
         </tbody>

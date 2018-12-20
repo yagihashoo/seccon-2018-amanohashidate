@@ -23,7 +23,7 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::findOrFail($id);
 
-        if ($challenge['solved']) {
+        if ($challenge['status'] === Challenge::$status_solved) {
             abort(403);
         }
 
@@ -38,7 +38,7 @@ class ChallengeController extends Controller
         $payload = Request::input('payload');
         $from_ip = explode('.', $_SERVER['REMOTE_ADDR']);
 
-        if ($challenge['solved']) {
+        if ($challenge['status'] === Challenge::$status_solved) {
             abort(403);
         }
 
@@ -64,7 +64,9 @@ class ChallengeController extends Controller
 
     public function upload()
     {
-        return view('upload');
+        return view('upload')->with([
+            'isUpdate' => false,
+        ]);
     }
 
     public function create()
@@ -100,21 +102,52 @@ class ChallengeController extends Controller
         return redirect("/upload");
     }
 
+    public function updateIndex($id)
+    {
+        $challenge = Challenge::findOrFail($id);
+
+        if ($challenge['status'] !== Challenge::$status_verified) {
+            abort(403);
+        }
+
+        if ($challenge['setter_id'] !== Auth::user()->id) {
+            abort(403);
+        }
+
+        return view('upload')->with([
+            'isUpdate' => true,
+            'challenge' => $challenge,
+        ]);
+    }
+
     public function update($id)
     {
-        $user = Auth::user();
+        $challenge = Challenge::findOrFail($id);
         $title = Request::input('title');
 
+        if ($challenge['setter_id'] !== Auth::user()->id) {
+            abort(403);
+        }
 
-        ChallengeVerify::dispatch()->onQueue('verify');
-        return redirect("/");
+        if ($challenge['status'] !== Challenge::$status_verified) {
+            abort(403);
+        }
+
+        if (!$title) {
+            abort(400);
+        }
+
+        $challenge->update([
+            'title' => $title
+        ]);
+        return redirect("/me");
     }
 
     public function download($id)
     {
         $challenge = Challenge::findOrFail($id);
 
-        if ($challenge['solved']) {
+        if ($challenge['status'] === Challenge::$status_solved) {
             abort(403);
         }
 
