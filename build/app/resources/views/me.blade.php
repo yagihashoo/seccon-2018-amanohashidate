@@ -47,4 +47,27 @@
         @endforeach
         </tbody>
     </table>
+    <h3 class="title is-3">Your Submissions (Recent 20)</h3>
+    <table class="table is-fullwidth is-striped">
+        <thead>
+        <th>status</th>
+        <th>id</th>
+        </thead>
+        <tbody>
+        @foreach( $submissions as $submission)
+            <tr>
+                <td>
+                    @if( $submission->status === \App\Challenge::$status_verified)
+                        <span class="tag is-success">SUCCESS</span>
+                    @elseif( $submission->status === \App\Challenge::$status_failed)
+                        <span class="tag is-danger">FAILED</span>
+                    @else
+                        <span class="tag is-info">IN QUEUE</span>
+                    @endif
+                </td>
+                <td>{{ $submission->challenge_id }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection

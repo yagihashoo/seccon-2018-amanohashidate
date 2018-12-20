@@ -15,6 +15,7 @@ class Submit extends Model
         'payload',
         'user_id',
         'challenge_id',
+        'status',
     ];
 
     /**

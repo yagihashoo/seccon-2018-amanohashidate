@@ -26,8 +26,8 @@
     </a>
         <form action="/challenge/{{$challenge->id}}/answer" method="post">
         	<h3 class="title is-3">Payload submission</h3>
-            <input class="input" type="text" name="payload" placeholder="Payload will be put like `/?${payload}`"/>
-            <input class="button" type="submit" value="submit"/>
+            <input class="input" type="text" name="payload" placeholder="Payload will be put like `/?${payload}`" maxlength="256">
+            <input class="button" type="submit" value="submit">
             @csrf
         </form>
 @endif

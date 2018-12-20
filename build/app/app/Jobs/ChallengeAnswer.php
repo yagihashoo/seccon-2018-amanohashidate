@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Submit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -16,16 +17,18 @@ class ChallengeAnswer implements ShouldQueue
 
     protected $challenge;
     protected $answer;
+    protected $submit;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($challenge, $answer)
+    public function __construct($challenge, $answer, $submit)
     {
         $this->challenge = $challenge;
         $this->answer = $answer;
+        $this->submit = $submit;
     }
 
     /**
@@ -60,10 +63,14 @@ class ChallengeAnswer implements ShouldQueue
             fclose($pipes[1]);
 
             if ($result === Challenge::$status_verified) {
-                Challenge::where('id', $this->challenge['id'])->update([
+                $this->challenge->update([
                     'status' => Challenge::$status_solved,
                 ]);
             }
+
+            $this->submit->update([
+                'status' => $result
+            ]);
 
             proc_close($process);
         }

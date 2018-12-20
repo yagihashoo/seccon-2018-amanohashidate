@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ChallengeVerify;
-use Illuminate\Http\Request;
+use App\Submit;
 use App\Challenge;
 use App\Jobs\ChallengeAnswer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class ChallengeController extends Controller
 {
@@ -32,12 +34,23 @@ class ChallengeController extends Controller
     public function answer($id)
     {
         $challenge = Challenge::findOrFail($id);
+        $payload = Request::input('payload');
 
         if ($challenge['solved']) {
             abort(403);
         }
 
-        ChallengeAnswer::dispatch($challenge, 'alert("XSS")');
+        if (!$payload) {
+            abort(400);
+        }
+
+        $submit = Submit::create([
+            'payload' => $payload,
+            'user_id' => Auth::user()->id,
+            'challenge_id' => $id,
+        ]);
+
+        ChallengeAnswer::dispatch($challenge, $payload, $submit);
         return redirect("/challenge/{$id}");
     }
 
