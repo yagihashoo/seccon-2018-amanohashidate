@@ -66,6 +66,7 @@ class ChallengeController extends Controller
     {
         return view('upload')->with([
             'isUpdate' => false,
+            'challenge' => null,
         ]);
     }
 

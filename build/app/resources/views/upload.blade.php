@@ -9,7 +9,7 @@
             <span class="tag is-warning is-medium">{{ session('error') }}</span>
         @endif
         <input class="input" type="text" name="title" placeholder="title" maxlength="64"
-               value="{{ $challenge->title }}">
+               value="{{ $challenge ? $challenge->title : '' }}">
         @if($isUpdate)
         @else
             <input class="input" type="text" name="model_answer"
