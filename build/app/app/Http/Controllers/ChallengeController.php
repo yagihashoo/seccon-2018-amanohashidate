@@ -156,4 +156,9 @@ class ChallengeController extends Controller
             ->header('Content-Type', 'text/plain')
             ->header('Content-Disposition', sprintf('attachment; filename="%s.html"', $id));
     }
+
+    public function rule()
+    {
+        return view('rule');
+    }
 }
