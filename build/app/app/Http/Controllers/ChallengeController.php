@@ -18,15 +18,25 @@ class ChallengeController extends Controller
 
     public function detail($id)
     {
+        $challenge = Challenge::findOrFail($id);
+
+        if ($challenge['solved']) {
+            abort(403);
+        }
+
         return view('challenge')->with([
-            'challenge' => Challenge::findOrFail($id),
+            'challenge' => $challenge,
         ]);
     }
 
     public function answer($id)
     {
-        // TODO: Implement proper access control
         $challenge = Challenge::findOrFail($id);
+
+        if ($challenge['solved']) {
+            abort(403);
+        }
+
         ChallengeAnswer::dispatch($challenge, 'alert("XSS")');
         return redirect("/challenge/{$id}");
     }
@@ -42,6 +52,11 @@ class ChallengeController extends Controller
     public function download($id)
     {
         $challenge = Challenge::findOrFail($id);
+
+        if ($challenge['solved']) {
+            abort(403);
+        }
+
         return response($challenge['html'], 200)
             ->header('Content-Type', 'text/plain')
             ->header('Content-Disposition', sprintf('attachment; filename="%s.html"', $id));
