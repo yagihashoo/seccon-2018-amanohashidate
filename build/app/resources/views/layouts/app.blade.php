@@ -24,9 +24,16 @@
                     <a href="{{ route('me') }}" class="navbar-item">Profile</a>
                     <a href="{{ route('logout') }}" class="navbar-item">Logout</a>
                 </div>
-            </div>
-        </nav>
-    </header>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{{ route('top') }}" class="navbar-item">Challenges</a>
+                        <a href="{{ route('upload') }}" class="navbar-item">Upload</a>
+                        <a href="{{ route('me') }}" class="navbar-item">Profile</a>
+                        <a href="{{ route('logout') }}" class="navbar-item">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
     <div class="content">
         <h2 class="title is-3">@yield('title')</h2>
         @yield('content')

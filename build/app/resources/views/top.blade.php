@@ -2,6 +2,7 @@
 @section('title', 'Top')
 
 @section('content')
+<<<<<<< HEAD
     <table>
         <thead>
         <tr>
