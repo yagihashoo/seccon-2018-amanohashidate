@@ -20,7 +20,7 @@
             <td>{{ $user->name }}</td>
         </tr>
     </table>
-    <h2 class="title is-3">Your Challenges (Recent 20)</h2>
+    <h3 class="title is-3">Your Challenges (Recent 20)</h3>
     <table class="table is-fullwidth is-striped">
         <thead>
         <th>status</th>
