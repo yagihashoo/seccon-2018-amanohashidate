@@ -44,13 +44,19 @@ class ChallengeController extends Controller
             abort(400);
         }
 
-        $submit = Submit::create([
-            'payload' => $payload,
-            'user_id' => Auth::user()->id,
-            'challenge_id' => $id,
-        ]);
+        if ($challenge->setter_id === Auth::user()->id) {
+            Request::session()->flash('error', 'This is your own challenge');
+        } else {
+            $submit = Submit::create([
+                'payload' => $payload,
+                'user_id' => Auth::user()->id,
+                'challenge_id' => $id,
+            ]);
 
-        ChallengeAnswer::dispatch($challenge, $payload, $submit);
+            ChallengeAnswer::dispatch($challenge, $payload, $submit);
+
+            Request::session()->flash('message', 'Queued, wait a while');
+        }
         return redirect("/challenge/{$id}");
     }
 
