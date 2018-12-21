@@ -49,7 +49,8 @@
     <table class="table is-fullwidth is-striped">
         <thead>
         <th>status</th>
-        <th>id</th>
+        <th>submission id</th>
+        <th>challenge id</th>
         <th>created_at</th>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@
                         <span class="tag is-info">IN QUEUE</span>
                     @endif
                 </td>
+                <td>{{ $submission->id }}</td>
                 <td>{{ $submission->challenge_id }}</td>
                 <td>{{ $submission->created_at }}</td>
             </tr>
