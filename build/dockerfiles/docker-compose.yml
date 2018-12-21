@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  amanohashidate.koth.seccon:
+  amanohashidate.pwn.ja.seccon:
     build: ./nginx
     ports:
       - "$APP_PORT:80"
