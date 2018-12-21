@@ -17,7 +17,7 @@
         </div>
         <div class="field">
             <input class="button is-link" type="submit" formaction="{{ route('login') }}" value="Login">
-            <a href="{{ route('register') }}" class="button is-text">Register</a>
+            <input class="button is-text" type="submit" formaction="{{ route('register') }}" value="Register">
         </div>
         @csrf
     </form>
