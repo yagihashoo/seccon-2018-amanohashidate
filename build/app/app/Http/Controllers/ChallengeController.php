@@ -82,9 +82,6 @@ class ChallengeController extends Controller
         $existingChallenge = Challenge::where('from_ip2', $from_ip[2])
             ->whereIn('status', [
                 Challenge::$status_verified,
-                Challenge::$status_none,
-                Challenge::$status_failed,
-                Challenge::$status_error
             ])->get();
 
         if (sizeof($existingChallenge) > 0) {
