@@ -50,7 +50,7 @@ services:
     working_dir: /home/worker/app
     volumes:
       - ../app:/home/worker/app
-    command: php artisan queue:listen --queue=default,verify
+    command: php artisan queue:listen -v --queue=default,verify
     restart: always
 
   verifier:
@@ -60,6 +60,6 @@ services:
     working_dir: /home/worker/app
     volumes:
       - ../app:/home/worker/app
-    command: php artisan queue:listen --queue=verify,default
+    command: php artisan queue:listen -v --queue=verify,default
     restart: always
 
