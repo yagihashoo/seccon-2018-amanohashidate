@@ -128,11 +128,11 @@ workflows:
               only:
                 - master
                 - develop
-      - test-server:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - develop
+#       - test-server:
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only:
+#                 - master
+#                 - develop

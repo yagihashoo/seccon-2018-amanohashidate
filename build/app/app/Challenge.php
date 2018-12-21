@@ -9,6 +9,11 @@ use Webpatser\Uuid\Uuid;
 
 class Challenge extends Model
 {
+    public static $status_none = 'NONE';
+    public static $status_verified = 'VERIFIED';
+    public static $status_solved = 'SOLVED';
+    public static $status_failed = 'FAILED';
+
     public $incrementing = false;
 
     /**
@@ -19,12 +24,15 @@ class Challenge extends Model
     protected $fillable = [
         'id',
         'title',
+        'html',
         'model_answer',
-        'verified',
-        'solved',
+        'status',
         'setter_id',
         'file_id',
-        'from_ip',
+        'from_ip0',
+        'from_ip1',
+        'from_ip2',
+        'from_ip3',
     ];
 
     /**
@@ -50,6 +58,8 @@ class Challenge extends Model
         if ($this->verified) {
             throw new VerifiedChallengeException();
         }
+
+        // TODO: Implement verification process
 
         $this->verified = true;
         $this->save();

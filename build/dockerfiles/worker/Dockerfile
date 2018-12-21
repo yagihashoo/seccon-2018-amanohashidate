@@ -1,35 +1,32 @@
-FROM ubuntu
+FROM centos:centos7
 
-ENV DEBIAN_FRONTENT=noninteractive
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
-ENV LANG=en_US.UTF-8
+RUN yum install -y gcc-c++ make
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN yum install -y nodejs
 
-COPY flag.txt /flag.txt
+RUN yum -y install epel-release
+RUN yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+RUN yum -y install --enablerepo=remi,remi-php72 php php-mbstring php-xml php-xmlrpc php-gd php-pdo php-pecl-mcrypt php-mysqlnd php-pecl-mysql php-redis
 
-RUN groupadd -g 1000 worker && useradd -g worker -u 500 --create-home worker
+RUN : > /etc/yum.repos.d/google-chrome.repo
+RUN echo '[google-chrome]' >> /etc/yum.repos.d/google-chrome.repo
+RUN echo 'name=google-chrome' >> /etc/yum.repos.d/google-chrome.repo
+RUN echo 'baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch' >> /etc/yum.repos.d/google-chrome.repo
+RUN echo 'enabled=1' >> /etc/yum.repos.d/google-chrome.repo
+RUN echo 'gpgcheck=1' >> /etc/yum.repos.d/google-chrome.repo
+RUN echo 'gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub' >> /etc/yum.repos.d/google-chrome.repo
+RUN yum update
+RUN yum -y install google-chrome-stable
 
-RUN apt-get -y update && apt-get -y install software-properties-common
+# Uncomment to skip the chromium download when installing puppeteer. If you do,
+# you'll need to launch puppeteer with:
+#     browser.launch({executablePath: 'google-chrome-stable'})
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-RUN set -xe && apt-get -y install --no-install-recommends ca-certificates curl socat xvfb x11vnc fluxbox xterm sudo supervisor
+# Add user so we don't need --no-sandbox.
+RUN groupadd -r worker && useradd -r -g worker -G audio,video worker \
+    && mkdir -p /home/worker/Downloads \
+    && chown -R worker:worker /home/worker
 
-RUN set -xe
-RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-
-RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
-
-RUN apt-get -y dist-upgrade
-RUN curl -sL https://deb.nodesource.com/setup_9.x | sudo -E sh -
-
-
-RUN apt-get -y update
-RUN apt-get -y install nodejs php7.2 google-chrome-stable
-
-RUN rm -rf /var/lib/apt/lists/*
-
-ENTRYPOINT sudo -u worker \
-           REDIS_BACKEND=redis:6379 \
-           QUEUE=worker \
-           INTERVAL=5 \
-           APP_INCLUDE=/home/worker/worker/app/Worker/Worker.php \
-           /home/worker/worker/vendor/bin/resque
+# Run everything after as non-privileged user.
+USER worker

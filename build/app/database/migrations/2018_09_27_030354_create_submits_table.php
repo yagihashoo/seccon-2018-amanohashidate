@@ -15,9 +15,11 @@ class CreateSubmitsTable extends Migration
     {
         Schema::create('submits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('payload', 512);
+            $table->string('payload', 256);
             $table->uuid('user_id');
             $table->uuid('challenge_id');
+            $table->string('status')->nullable();
+            $table->string('from_ip');
             $table->timestamps();
         });
     }

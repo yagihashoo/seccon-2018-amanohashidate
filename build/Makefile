@@ -24,7 +24,7 @@ setup-dev:
 		php artisan key:generate
 
 up:
-	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build --remove-orphans
 
 restart:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) restart
@@ -51,6 +51,12 @@ migrate:
 init:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \
 		php artisan migrate:refresh --seed
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec -w /home/worker/app/worker worker \
+		npm install
+
+rebuild-node-sass:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec next \
+		npm rebuild node-sass
 
 test-server:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) exec php-fpm \

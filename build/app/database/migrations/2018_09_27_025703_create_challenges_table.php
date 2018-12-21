@@ -15,13 +15,15 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->string('title', 128)->default('');
-            $table->string('model_answer', 512)->default('');
-            $table->boolean('verified')->default(false);
-            $table->boolean('solved')->default(false);
-            $table->string('from_ip');
+            $table->string('title', 64)->default('');
+            $table->string('model_answer', 256)->default('');
+            $table->string('status')->default(\App\Challenge::$status_none);
+            $table->string('from_ip0');
+            $table->string('from_ip1');
+            $table->string('from_ip2');
+            $table->string('from_ip3');
             $table->uuid('setter_id');
-            $table->uuid('file_id')->unique();
+            $table->string('html', 4096);
             $table->timestamps();
         });
     }
