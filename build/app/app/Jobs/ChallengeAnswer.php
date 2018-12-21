@@ -74,7 +74,7 @@ class ChallengeAnswer implements ShouldQueue
             }
 
             $this->submit->update([
-                'status' => $result
+                'status' => $result === '' ? Challenge::$status_error : $result,
             ]);
 
             if (App::environment('production')) {

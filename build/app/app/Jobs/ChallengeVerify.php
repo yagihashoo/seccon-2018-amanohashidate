@@ -65,7 +65,7 @@ class ChallengeVerify implements ShouldQueue
             fclose($pipes[1]);
 
             $this->challenge->update([
-                'status' => $result,
+                'status' => $result === '' ? Challenge::$status_error : $result,
             ]);
 
             proc_close($process);

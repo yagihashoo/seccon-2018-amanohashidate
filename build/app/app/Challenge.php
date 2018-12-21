@@ -13,6 +13,7 @@ class Challenge extends Model
     public static $status_verified = 'VERIFIED';
     public static $status_solved = 'SOLVED';
     public static $status_failed = 'FAILED';
+    public static $status_error = 'SERVER ERROR';
 
     public $incrementing = false;
 
