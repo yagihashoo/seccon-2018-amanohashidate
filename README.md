@@ -1,30 +1,37 @@
 # 天橋立
-[![CircleCI](https://circleci.com/gh/yagihashoo/seccon-2018-amanohashidate/tree/master.svg?style=svg&circle-token=a4896af40a8d9c9f975141a0aaccedaee6357dcf)](https://circleci.com/gh/yagihashoo/seccon-2018-amanohashidate/tree/master)
 
 ## 問題文
+
 ```html
-<a href="http://amanohashidate.koth.seccon" target="_blank">天橋立</a>
+<a href="http://amanohashidate.pwn.ja.seccon" target="_blank">XSS HELL</a>
 ```
 
 ## FLAG
+
 ```
-SECCON{flag1}
-SECCON{flag2}
-SECCON{flag3}
-SECCON{flag4}
-SECCON{flag5}
+No flag
 ```
 
 ## FLAG URL
+
 ```
-http://amanohashidate.koth.seccon/flag
+http://amanohashidate.pwn.ja.seccon/unsolved
 ```
 
 ## デプロイ方法
+
 ```sh
 make setup
-make start
+make up
+make init
 ```
 
 ## Write-up
-問題の想定解法を記載。レビューに使います。
+
+- Attack PointなしなのでWrite-up割愛。ルールの解説のみ。
+- XSS Challengeをチーム間で出題し合う形式。
+  - 問題はHTML形式で登録する
+  - 1チーム1問まで問題を公開できる
+  - HTML内からの外部スクリプトの参照などはCSPで禁止する
+- Defense point付与タイミングで解かれていない問題の作成チームにDefense pointが付与される
+- 他チームの問題を解くことでDefense pointの獲得を防ぐことができる
