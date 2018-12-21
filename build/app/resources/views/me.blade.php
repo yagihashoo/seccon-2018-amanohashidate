@@ -50,6 +50,7 @@
         <thead>
         <th>status</th>
         <th>id</th>
+        <th>created_at</th>
         </thead>
         <tbody>
         @foreach( $submissions as $submission)
@@ -64,6 +65,7 @@
                     @endif
                 </td>
                 <td>{{ $submission->challenge_id }}</td>
+                <td>{{ $submission->created_at }}</td>
             </tr>
         @endforeach
         </tbody>
