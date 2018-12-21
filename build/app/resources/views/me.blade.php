@@ -38,6 +38,8 @@
                         <span class="tag is-warning">SOLVED</span>
                     @elseif( $challenge->status === \App\Challenge::$status_failed)
                         <span class="tag is-danger">FAILED</span>
+                    @elseif( $challenge->status === \App\Challenge::$status_error)
+                        <span class="tag is-danger">SERVER ERROR</span>
                     @endif
                 </td>
                 <td><a href="{{ route('update-index', $challenge->id) }}">{{ $challenge->id }}</a></td>
@@ -61,6 +63,8 @@
                         <span class="tag is-success">SUCCESS</span>
                     @elseif( $submission->status === \App\Challenge::$status_failed)
                         <span class="tag is-danger">FAILED</span>
+                    @elseif( $submission->status === \App\Challenge::$status_error)
+                        <span class="tag is-danger">SERVER ERROR</span>
                     @else
                         <span class="tag is-info">IN QUEUE</span>
                     @endif
