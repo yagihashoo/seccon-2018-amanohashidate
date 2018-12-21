@@ -7,7 +7,6 @@ setup:
 	@ echo "🤖  < Resolving code dependencies..."
 	@ cd $(CURDIR)/app && \
 		composer install --no-dev && \
-		yarn
 	@ echo
 	@ echo "🤖  < Setting up encryption key..."
 	@ cd $(CURDIR)/app && \
@@ -17,7 +16,6 @@ setup-dev:
 	@ echo "🤖  < Resolving code dependencies..."
 	@ cd $(CURDIR)/app && \
 		composer install && \
-		yarn
 	@ echo
 	@ echo "🤖  < Setting up encryption key..."
 	@ cd $(CURDIR)/app && \
