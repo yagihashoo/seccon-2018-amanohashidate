@@ -19,6 +19,7 @@ class CreateSubmitsTable extends Migration
             $table->uuid('user_id');
             $table->uuid('challenge_id');
             $table->string('status')->nullable();
+            $table->string('from_ip');
             $table->timestamps();
         });
     }

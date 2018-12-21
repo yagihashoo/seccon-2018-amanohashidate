@@ -53,6 +53,7 @@ class ChallengeController extends Controller
                 'payload' => $payload,
                 'user_id' => Auth::user()->id,
                 'challenge_id' => $id,
+                'from_ip' => implode('.', $from_ip),
             ]);
 
             ChallengeAnswer::dispatch($challenge, $payload, $submit);

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Hadoken;
 use App\Submit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -9,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Challenge;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
 class ChallengeAnswer implements ShouldQueue
@@ -71,6 +73,17 @@ class ChallengeAnswer implements ShouldQueue
             $this->submit->update([
                 'status' => $result
             ]);
+
+            if (App::environment('production')) {
+                switch ($result) {
+                    case Challenge::$status_verified:
+                        Hadoken::success($this->submit->from_ip);
+                        break;
+                    default:
+                        Hadoken::fail($this->submit->from_ip);
+                        break;
+                }
+            }
 
             proc_close($process);
         }

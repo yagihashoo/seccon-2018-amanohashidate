@@ -16,6 +16,7 @@ class Submit extends Model
         'user_id',
         'challenge_id',
         'status',
+        'from_ip',
     ];
 
     /**
