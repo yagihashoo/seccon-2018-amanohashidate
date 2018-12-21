@@ -42,6 +42,7 @@ const server = http.createServer((req, res) => {
     } catch(e) {
         console.log(failMsg);
         console.error(e);
+        server.close();
         process.exit(1);
     }
 
