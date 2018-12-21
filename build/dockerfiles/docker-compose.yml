@@ -30,7 +30,7 @@ services:
     restart: always
 
   php:
-    buikd: ./php-fpm
+    build: ./php-fpm
     working_dir: /var/www/app
     depends_on:
       - mysql
