@@ -21,11 +21,27 @@ services:
       - mysql
       - redis
       - worker
+      - verifier
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       TZ: "Asia/Tokyo"
     volumes:
        - ../app:/var/www/app
+    restart: always
+
+  php:
+    buikd: ./php-fpm
+    working_dir: /var/www/app
+    depends_on:
+      - mysql
+      - redis
+      - worker
+      - verifier
+    volumes:
+      - ../app:/var/www/app
+    environment:
+      TZ: "Asia/Tokyo"
+    command: php artisan queue:work --queue=verify,default --tries 2
     restart: always
 
   mysql:
