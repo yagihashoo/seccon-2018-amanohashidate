@@ -61,7 +61,7 @@ const server = http.createServer((req, res) => {
             waitUntil: 'networkidle2',
         });
     } catch (e) {
-        console.error(e);
+        // pass
     }
 
     await page.waitFor(500);
