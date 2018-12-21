@@ -80,8 +80,12 @@ class ChallengeController extends Controller
         $from_ip = explode('.', $_SERVER['REMOTE_ADDR']);
 
         $existingChallenge = Challenge::where('from_ip2', $from_ip[2])
-            ->whereIn('status', [Challenge::$status_verified, Challenge::$status_none, Challenge::$status_failed])
-            ->get();
+            ->whereIn('status', [
+                Challenge::$status_verified,
+                Challenge::$status_none,
+                Challenge::$status_failed,
+                Challenge::$status_error
+            ])->get();
 
         if (sizeof($existingChallenge) > 0) {
             Request::session()->flash('error', 'The challenge of your team is still alive');
