@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
     try {
         browser = await puppeteer.launch(opt);
     } catch(e) {
-        console.log(failMsg);
+        process.stdout.write(failMsg);
         console.error(e);
         server.close();
         process.exit(1);
