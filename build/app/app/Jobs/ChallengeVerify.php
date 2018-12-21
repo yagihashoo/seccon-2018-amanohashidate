@@ -47,7 +47,7 @@ class ChallengeVerify implements ShouldQueue
             2 => array("file", "/tmp/error-output.txt", "a"),
         ];
 
-        $cmd = 'node verify.js';
+        $cmd = 'timeout -sINT 5s node verify.js';
         $cwd = '/home/worker/app/worker';
         $env = [
             'html' => $html,
@@ -68,9 +68,6 @@ class ChallengeVerify implements ShouldQueue
 
             proc_close($process);
         }
-
-        exec('pkill -f node');
-        exec('pkill -f chrome');
     }
 
     public function retryUntil()
