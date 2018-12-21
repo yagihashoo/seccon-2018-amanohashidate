@@ -24,6 +24,9 @@ setup-dev:
 up:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build --remove-orphans
 
+up-production:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) up -d --build --remove-orphans --scale worker=2
+
 restart:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) restart
 
