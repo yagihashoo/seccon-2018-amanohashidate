@@ -14,6 +14,8 @@ class ChallengeVerify implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $tries = 3;
+
     protected $challenge;
     protected $answer;
 
@@ -66,5 +68,13 @@ class ChallengeVerify implements ShouldQueue
 
             proc_close($process);
         }
+
+        exec('pkill -f node');
+        exec('pkill -f chrome');
+    }
+
+    public function retryUntil()
+    {
+        return now()->addSeconds(10);
     }
 }
