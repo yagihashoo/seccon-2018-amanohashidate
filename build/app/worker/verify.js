@@ -9,6 +9,7 @@ const failMsg = process.env.fail;
 const server = http.createServer((req, res) => {
     res.writeHead(200, {
         'Content-Type': 'text/html; charset=utf-8',
+        'X-XSS-Protection': '0',
         'Content-Security-Policy': "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:",
     });
     res.end(html);
@@ -57,7 +58,7 @@ const server = http.createServer((req, res) => {
     });
 
     try {
-        await page.goto(`http://localhost:8000/?${answer}`, {
+        await page.goto(`http://localhost:8000/?${encodeURIComponent(answer)}`, {
             waitUntil: 'networkidle2',
         });
     } catch (e) {
