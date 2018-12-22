@@ -42,7 +42,15 @@ class ChallengeAnswer implements ShouldQueue
      */
     public function handle()
     {
-        Log::info(sprintf('Started job to verify answer: %s', $this->submit->id));
+        Log::info(
+            sprintf('Started job to verify answer: %s', $this->submit->id),
+            [
+                'user_id' => $this->submit->user_id,
+                'challenge_id' => $this->challenge->id,
+                'answer' => $this->answer,
+                'hostname' => gethostname(),
+            ]
+        );
         $html = $this->challenge['html'];
         $answer = $this->answer;
 
@@ -91,7 +99,12 @@ class ChallengeAnswer implements ShouldQueue
             proc_close($process);
         }
 
-        Log::info(sprintf('Finished job to verify answer: %s', $this->submit->id));
+        Log::info(sprintf(
+            'Finished job to verify answer: %s', $this->submit->id),
+            [
+                'result' => $result,
+            ]
+        );
     }
 
     public function retryUntil()

@@ -38,7 +38,14 @@ class ChallengeVerify implements ShouldQueue
      */
     public function handle()
     {
-        Log::info(sprintf('Started job to verify challenge: %s', $this->challenge->id));
+        Log::info(
+            sprintf('Started job to verify challenge: %s', $this->challenge->id),
+            [
+                'setter_id' => $this->challenge->setter_id,
+                'model_answer' => $this->challenge->model_answer,
+                'hostname' => gethostname(),
+            ]
+        );
 
         $html = $this->challenge['html'];
         $answer = $this->answer;
@@ -71,7 +78,12 @@ class ChallengeVerify implements ShouldQueue
             proc_close($process);
         }
 
-        Log::info(sprintf('Finished job to verify challenge: %s', $this->challenge->id));
+        Log::info(
+            sprintf('Finished job to verify challenge: %s', $this->challenge->id),
+            [
+                'result' => $result,
+            ]
+        );
     }
 
     public function retryUntil()
