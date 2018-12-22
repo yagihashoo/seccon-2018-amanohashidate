@@ -43,8 +43,9 @@ class ChallengeAnswer implements ShouldQueue
     public function handle()
     {
         Log::info(
-            sprintf('Started job to verify answer: %s', $this->submit->id),
+            'Started job to verify answer',
             [
+                'id' => $this->submit->id,
                 'user_id' => $this->submit->user_id,
                 'challenge_id' => $this->challenge->id,
                 'answer' => $this->answer,
@@ -99,9 +100,10 @@ class ChallengeAnswer implements ShouldQueue
             proc_close($process);
         }
 
-        Log::info(sprintf(
-            'Finished job to verify answer: %s', $this->submit->id),
+        Log::info(
+            'Finished job to verify answer',
             [
+                'id' => $this->submit->id,
                 'result' => $result,
             ]
         );
