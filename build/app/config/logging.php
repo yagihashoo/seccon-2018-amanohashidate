@@ -60,6 +60,14 @@ return [
             'level' => env('LOG_SLACK_LEVEL', 'critical'),
         ],
 
+        'slack-info' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
+            'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
+            'level' => 'info',
+        ],
+
         'papertrail' => [
             'driver'  => 'monolog',
             'level' => 'debug',
