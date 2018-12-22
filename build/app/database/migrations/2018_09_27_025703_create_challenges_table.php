@@ -23,7 +23,7 @@ class CreateChallengesTable extends Migration
             $table->string('from_ip2');
             $table->string('from_ip3');
             $table->uuid('setter_id');
-            $table->string('html', 4096);
+            $table->string('html', 1337);
             $table->timestamps();
         });
     }

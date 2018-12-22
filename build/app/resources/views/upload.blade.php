@@ -13,9 +13,9 @@
         @if($isUpdate)
         @else
             <input class="input" type="text" name="model_answer"
-                   placeholder="model answer (up to 256 bytes) which will be passed like `/?${encodeURIComponent(payload)}`"
+                   placeholder="model answer (up to 256 letters) which will be passed like `/?${encodeURIComponent(payload)}`"
                    maxlength="256">
-            <textarea class="textarea" maxlength="4096" name="html" placeholder="html (up to 4096 bytes)"></textarea>
+            <textarea class="textarea" maxlength="1337" name="html" placeholder="html (up to 1337 letters)"></textarea>
         @endif
         @csrf
         <input class="button" type="submit" value="submit">
