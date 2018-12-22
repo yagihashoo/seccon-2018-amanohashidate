@@ -6,7 +6,7 @@
         <li>Challenge一覧に同時に掲載される問題は1チーム1問のみです。</li>
         <li>公開中の問題がない場合のみ新しい問題を登録できます。</li>
         <li>問題の達成判定は `alert('XSS')` またはそれと同等のコードを実行できたか否かによっておこないます。</li>
-        <li>Payloadは `location.search` 経由で渡されます。(形式: `/?${payload}` )</li>
+        <li>Payloadは `location.search` 経由で渡されます。(形式: `/?${encodeURIComponent(payload)}` )</li>
         <li>動作検証環境サーバで設定している特筆すべきヘッダは以下のとおりです。
             <ul>
                 <li>Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:</li>
