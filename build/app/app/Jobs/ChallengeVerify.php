@@ -24,9 +24,9 @@ class ChallengeVerify implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($challenge, $answer)
+    public function __construct($challenge_id, $answer)
     {
-        $this->challenge = $challenge;
+        $this->challenge = Challenge::findOrFail($challenge_id);
         $this->answer = $answer;
     }
 

@@ -60,7 +60,7 @@ class ChallengeController extends Controller
                 'from_ip' => implode('.', $from_ip),
             ]);
 
-            ChallengeAnswer::dispatch($challenge, $payload, $submit);
+            ChallengeAnswer::dispatch($challenge->id, $payload, $submit->id);
 
             Request::session()->flash('message', 'Queued, wait a while');
         }
@@ -102,7 +102,7 @@ class ChallengeController extends Controller
                 'from_ip3' => $from_ip[3],
             ]);
 
-            ChallengeVerify::dispatch($challenge, $model_answer)->onQueue('verify');
+            ChallengeVerify::dispatch($challenge->id, $model_answer)->onQueue('verify');
             Request::session()->flash('message', 'Queued, wait a while for verification');
         }
         return redirect("/upload");

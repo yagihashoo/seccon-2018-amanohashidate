@@ -28,11 +28,11 @@ class ChallengeAnswer implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($challenge, $answer, $submit)
+    public function __construct($challenge_id, $answer, $submit_id)
     {
-        $this->challenge = $challenge;
+        $this->challenge = Challenge::findOrFail($challenge_id);
         $this->answer = $answer;
-        $this->submit = $submit;
+        $this->submit = Submit::findOrFail($submit_id);
     }
 
     /**
