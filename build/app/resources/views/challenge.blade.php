@@ -13,7 +13,7 @@
             <td>{{ $challenge->setter_id }}</td>
         </tr>
         <tr>
-            <th>From IP:</th>
+            <th>Team:</th>
             <td>{{ $team ? $team->name : 'UNKNOWN' }}</td>
         </tr>
         <tr>

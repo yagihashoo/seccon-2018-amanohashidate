@@ -7,7 +7,7 @@
         <tr>
             <th>#</th>
             <th>Title</th>
-            <th>IP</th>
+            <th>Team</th>
         </tr>
         </thead>
         <tbody>
