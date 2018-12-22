@@ -9,13 +9,16 @@ use App\Jobs\ChallengeAnswer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
+use App\Team;
 
 class ChallengeController extends Controller
 {
     public function index()
     {
         return view('top')->with([
-            'challenges' => Challenge::where('status', 'VERIFIED')->orderBy('id', 'asc')->get()->toArray(),
+            'challenges' => Challenge::where('status', 'VERIFIED')->orderBy('challenges.id', 'asc')
+                ->leftJoin('teams', 'challenges.from_ip2', '=', 'teams.id')
+                ->get(['title', 'challenges.id as id', 'teams.id as team_id', 'teams.name as team_name']),
         ]);
     }
 
@@ -29,6 +32,7 @@ class ChallengeController extends Controller
 
         return view('challenge')->with([
             'challenge' => $challenge,
+            'team' => Team::where('id', $challenge->from_ip2)->first(),
         ]);
     }
 
@@ -96,7 +100,6 @@ class ChallengeController extends Controller
                 'from_ip1' => $from_ip[1],
                 'from_ip2' => $from_ip[2],
                 'from_ip3' => $from_ip[3],
-
             ]);
 
             ChallengeVerify::dispatch($challenge, $model_answer)->onQueue('verify');

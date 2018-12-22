@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <th>From IP:</th>
-            <td>{{ $challenge->from_ip0 }}.{{ $challenge->from_ip1 }}.{{ $challenge->from_ip2 }}.{{ $challenge->from_ip3 }}</td>
+            <td>{{ $team ? $team->name : 'UNKNOWN' }}</td>
         </tr>
         <tr>
             <th>Created at:</th>
