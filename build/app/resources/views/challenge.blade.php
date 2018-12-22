@@ -37,7 +37,7 @@
             <span class="tag is-warning is-medium">{{ session('error') }}</span>
         @endif
         <input class="input" type="text" name="payload" required autofocus
-               placeholder="Payload will be passed like `/?${payload}`" maxlength="256">
+               placeholder="Payload will be passed like `/?${encodeURIComponent(payload)}`" maxlength="256">
         <input class="button" type="submit" value="submit">
         @csrf
     </form>
