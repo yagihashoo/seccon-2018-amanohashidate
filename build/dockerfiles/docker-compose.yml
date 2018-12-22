@@ -79,3 +79,4 @@ services:
     command: php artisan queue:listen -v --queue=verify,default
     restart: always
 
+
