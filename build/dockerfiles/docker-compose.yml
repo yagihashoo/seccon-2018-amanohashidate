@@ -29,21 +29,6 @@ services:
        - ../app:/var/www/app
     restart: always
 
-  php:
-    build: ./php-fpm
-    working_dir: /var/www/app
-    depends_on:
-      - mysql
-      - redis
-      - worker
-      - verifier
-    volumes:
-      - ../app:/var/www/app
-    environment:
-      TZ: "Asia/Tokyo"
-    command: php artisan queue:work --queue=verify,default --tries 2
-    restart: always
-
   mysql:
     image: mysql:5.7
     command: mysqld --character-set-server=utf8mb4 --skip-character-set-client-handshake --collation-server=utf8mb4_unicode_ci
@@ -76,7 +61,7 @@ services:
     working_dir: /home/worker/app
     volumes:
       - ../app:/home/worker/app
-    command: php artisan queue:listen -v --queue=verify,default
+    command: php artisan queue:work -v --queue=verify,default
     restart: always
 
 

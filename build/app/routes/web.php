@@ -18,8 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/challenge/', 'ChallengeController@index');
     Route::get('/challenge/{id}', 'ChallengeController@detail')->name('challenge');
-    // Route::middleware('throttle:5,1')->post('/challenge/{id}/answer', 'ChallengeController@answer')->name('answer');
-    Route::post('/challenge/{id}/answer', 'ChallengeController@answer')->name('answer');
+    Route::middleware('throttle:5,1')->post('/challenge/{id}/answer', 'ChallengeController@answer')->name('answer');
     Route::get('/challenge/{id}/download', 'ChallengeController@download')->name('download');
     Route::get('/upload', 'ChallengeController@upload')->name('upload');
     Route::middleware('throttle:5,1')->post('/challenge/create', 'ChallengeController@create')->name('create');
