@@ -42,13 +42,13 @@ const server = http.createServer((req, res) => {
     } catch(e) {
         process.stdout.write(failMsg);
         console.error(e);
-        server.close();
+        await server.close();
         process.exit(1);
     }
 
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(1000);
-    page.on('dialog', async dialog => {
+    page.on('dialog', dialog => {
         if (dialog.type() === 'alert' && dialog.message() === 'XSS') {
             process.stdout.write(successMsg);
             fail = false;
@@ -70,6 +70,6 @@ const server = http.createServer((req, res) => {
         process.stdout.write(failMsg);
     }
 
-    server.close();
+    await server.close();
 })();
 
