@@ -47,6 +47,7 @@ services:
   worker:
     build: ./worker
     depends_on:
+      - mysql
       - redis
     working_dir: /home/worker/app
     volumes:
@@ -57,6 +58,7 @@ services:
   verifier:
     build: ./worker
     depends_on:
+      - mysql
       - redis
     working_dir: /home/worker/app
     volumes:
