@@ -140,7 +140,7 @@ class ChallengeController extends Controller
             abort(403);
         }
 
-        if (!$title) {
+        if (!$title or $title === $challenge->title) {
             abort(400);
         }
 
