@@ -130,6 +130,7 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::findOrFail($id);
         $title = Request::input('title');
+        $model_answer = Request::input('model_answer');
 
         if ($challenge['setter_id'] !== Auth::user()->id) {
             abort(403);
@@ -144,8 +145,12 @@ class ChallengeController extends Controller
         }
 
         $challenge->update([
-            'title' => $title
+            'title' => $title,
+            'status' => Challenge::$status_none,
         ]);
+
+        ChallengeVerify::dispatch($challenge->id, $model_answer)->onQueue('verify');
+
         return redirect("/me");
     }
 
