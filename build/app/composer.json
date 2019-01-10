@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.2.10",
-        "fideloper/proxy": "4.0.0",
+        "fideloper/proxy": "4.1.0",
         "laravel/framework": "5.7.20",
         "laravel/tinker": "1.0.8",
         "sentry/sentry-laravel": "0.10.1",
