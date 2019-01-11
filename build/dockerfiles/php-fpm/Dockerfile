@@ -1,4 +1,4 @@
-FROM php:7.3.0-fpm
+FROM php:7.3.1-fpm
 
 RUN apt-get update
 RUN apt-get install -y busybox-static
