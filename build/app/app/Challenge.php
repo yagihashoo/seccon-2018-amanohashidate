@@ -50,7 +50,7 @@ class Challenge extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = Uuid::generate()->string;
+            $model->{$model->getKeyName()} = Uuid::generate(4)->string;
         });
     }
 
