@@ -19,7 +19,7 @@
         "fzaninotto/faker": "1.8.0",
         "mockery/mockery": "1.2.1",
         "nunomaduro/collision": "2.1.1",
-        "phpunit/phpunit": "8.0.2"
+        "phpunit/phpunit": "8.0.3"
     },
     "autoload": {
         "classmap": [
