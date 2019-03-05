@@ -9,6 +9,6 @@
   "author": "yagihashoo",
   "license": "ISC",
   "dependencies": {
-    "puppeteer-core": "1.12.2"
+    "puppeteer-core": "1.13.0"
   }
 }
