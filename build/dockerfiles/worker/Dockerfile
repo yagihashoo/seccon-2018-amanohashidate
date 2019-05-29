@@ -15,7 +15,7 @@ RUN echo 'baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch' >> /et
 RUN echo 'enabled=1' >> /etc/yum.repos.d/google-chrome.repo
 RUN echo 'gpgcheck=1' >> /etc/yum.repos.d/google-chrome.repo
 RUN echo 'gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub' >> /etc/yum.repos.d/google-chrome.repo
-RUN yum update
+RUN yum -y update
 RUN yum -y install google-chrome-stable
 
 # Uncomment to skip the chromium download when installing puppeteer. If you do,
