@@ -30,6 +30,9 @@ up-production:
 restart:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) restart
 
+stop:
+	@ docker-compose -f $(COMPOSE) -p $(PREFIX) stop
+
 clean:
 	@ docker-compose -f $(COMPOSE) -p $(PREFIX) stop && \
 		yes | docker-compose -f $(COMPOSE) -p $(PREFIX) rm
