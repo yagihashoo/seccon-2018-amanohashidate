@@ -6,7 +6,7 @@ PREFIX = amanohashidate
 setup:
 	@ echo "🤖  < Resolving code dependencies..."
 	@ cd $(CURDIR)/app && \
-		composer install --no-dev && \
+		composer install --no-dev
 	@ echo
 	@ echo "🤖  < Setting up encryption key..."
 	@ cd $(CURDIR)/app && \
@@ -15,7 +15,7 @@ setup:
 setup-dev:
 	@ echo "🤖  < Resolving code dependencies..."
 	@ cd $(CURDIR)/app && \
-		composer install && \
+		composer install
 	@ echo
 	@ echo "🤖  < Setting up encryption key..."
 	@ cd $(CURDIR)/app && \
