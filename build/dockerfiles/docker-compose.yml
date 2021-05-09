@@ -41,7 +41,7 @@ services:
     restart: always
 
   redis:
-    image: redis:4.0.11
+    image: redis:4.0.14
     restart: always
 
   worker:
